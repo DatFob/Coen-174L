@@ -1,0 +1,93 @@
+a {
+	color: White;
+	font-size: 16px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+a:link {
+	color: White;
+	font-family: "Helvetica Neue";
+}
+
+a:visited {
+	color: White;
+	font-family: "Helvetica Neue";
+}
+
+a:hover {
+	color: rgb(181, 0, 67);
+	font-family: "Helvetica Neue";
+}
+
+a:active {
+	color: White;
+	font-family: "Helvetica Neue";
+}
+
+.menubtn {
+	display: none;
+}
+
+body {
+	font-family: "Helvetica Neue";
+}
+
+h1 {
+	color: rgb(181, 0, 67);
+	font-size: 50px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+h2 {
+	color: rgb(181, 0, 67);
+	font-size: 40px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+p {
+	color: black;
+	font-size: 14px;
+}
+
+#menu_bar {
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	clear: left;
+	clear: right;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: center;
+	padding-right: 50px;
+	padding: 20px;
+	font-size: 16px;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}
+
+#bottom_bar {
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: right;
+	padding-left: 20px;
+	padding-right: 20px;
+	clear: left;
+	font-size: 12pt;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}
+
+#SCU_logo {
+	width: 100px;
+	height: 100px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
