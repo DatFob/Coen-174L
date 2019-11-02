@@ -109,6 +109,8 @@ p {
 	text-align: center;
 }
 
+#loginfo {}
+
 #footer {
 	display: block;
 	visibility: visible;
