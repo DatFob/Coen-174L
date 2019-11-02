@@ -52,7 +52,29 @@ p {
 	font-size: 14px;
 }
 
-#menu_bar {
+#scu_logo {
+	width: 15%;
+	height: 100px;
+	margin-left: 10px;
+	margin-top: 10px;
+	float: left;
+	clear: none;
+}
+
+#header {
+	width: 83%;
+	float: right;
+	clear: none;
+}
+
+#header h1 {
+	color: rgb(181, 0, 67);
+	font-size: 50px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+#nav_bar {
 	display: block;
 	visibility: visible;
 	width: 1045px;
@@ -69,7 +91,25 @@ p {
 	font-family: "Helvetica Neue";
 }
 
-#bottom_bar {
+#progress {
+	width: 100%;
+	clear: left;
+	clear: right;
+}
+
+#login {}
+
+#login h2 {
+	text-align: center;
+}
+
+#createaccount {}
+
+#createaccount h2 {
+	text-align: center;
+}
+
+#footer {
 	display: block;
 	visibility: visible;
 	width: 1045px;
@@ -83,11 +123,4 @@ p {
 	font-size: 12pt;
 	font-style: bold;
 	font-family: "Helvetica Neue";
-}
-
-#SCU_logo {
-	width: 100px;
-	height: 100px;
-	margin-left: 10px;
-	margin-top: 10px;
 }
