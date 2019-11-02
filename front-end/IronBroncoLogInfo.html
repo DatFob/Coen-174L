@@ -18,8 +18,31 @@
 		<a href="IronBroncoLeaderboards.html">LEADERBOARDS</a>
 		<a href="IronBroncoJoinTeam.html">JOIN/MANAGE TEAM</a>
 	</div>
-	<div id="progress">
-		<h2>Progress</h2>
+	<div id="loginfo">
+		<h2>Log Information</h2>
+		<form action="/login_information.php"> <!--Click the "Submit" button and the form-data will be sent to a page on the server called "/login_page.php".-->
+			Swim: <input type="number" name="number">
+			<select>
+				<option value="yards">Yards</option>
+				<option value="miles">Miles</option>
+				<option value="kilometers">Kilometers</option>
+			</select>
+			<input type="button" value="Save"><br><br> <!--maybe submit instead of button-->
+			Run: <input type="number" name="number">
+			<select>
+				<option value="yards">Yards</option>
+				<option value="miles">Miles</option>
+				<option value="kilometers">Kilometers</option>
+			</select>
+			<input type="button" value="Save"><br><br> <!--maybe submit instead of button-->
+			Bike: <input type="number" name="number">
+			<select>
+				<option value="yards">Yards</option>
+				<option value="miles">Miles</option>
+				<option value="kilometers">Kilometers</option>
+			</select>
+			<input type="button" value="Save"><br> <!--maybe submit instead of button-->
+		</form>
 	</div>
 	<div id="footer">
 		<a href="IronBroncoLogin.html">LOGOUT</a>
