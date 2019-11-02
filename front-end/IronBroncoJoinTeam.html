@@ -10,7 +10,7 @@
 		<img src="scu_logos/SCU-Seal_OutlinedRed.png" alt="SCU seal" width="100" height="100">
 	</div>
 	<div id ="header">
-		<h1>Iron Bronco</h1>
+		<h1>Join Team</h1>
 	</div>
 	<div id="nav_bar">
 		<a href="IronBroncoHome.html">HOME</a>
@@ -18,8 +18,12 @@
 		<a href="IronBroncoLeaderboards.html">LEADERBOARDS</a>
 		<a href="IronBroncoJoinTeam.html">JOIN/MANAGE TEAM</a>
 	</div>
-	<div id="progress">
-		<h2>Progress</h2>
+	<div id="jointeam">
+		<h2>Join Team</h2>
+		<form action="/team_information.php"> <!--Click the "Submit" button and the form-data will be sent to a page on the server called "/login_page.php".-->
+			Team Name: <input type="text" name="team"><br>
+			<input type="button" value="Join Team"><br><br> <!--maybe submit instead of button-->
+		</form>
 	</div>
 	<div id="footer">
 		<a href="IronBroncoLogin.html">LOGOUT</a>
