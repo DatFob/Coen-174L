@@ -111,6 +111,12 @@ p {
 
 #loginfo {}
 
+#jointeam {}
+
+#jointeam h2 {
+	text-align: center;
+}
+
 #footer {
 	display: block;
 	visibility: visible;
