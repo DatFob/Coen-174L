@@ -21,10 +21,16 @@
 			Username: <input type="text" name="Username"><br>
 			Password: <input type="password" name="Password"><br>
 			<input type="button" value="Log In"> <!--maybe submit instead of button-->
-			<input type="button" value="Create Account">
+			<input type="button" value="Create Account" onclick="createaccountpage()">
 		</form>
 	</div>
 	<div id="footer">
 	</div>
+	<script>
+		function createaccountpage()
+		{
+			window.location = 'IronBroncoCreateAccount.html';
+		}
+	</script>
 </body>
 </html>
