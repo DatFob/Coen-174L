@@ -18,6 +18,7 @@ function passwordCheck(a,b){
     return true;
 }
 
+/*Copy values of username and password to local variables name, first & second password*/
 function getValues(){
     name = document.getElementById("createForm").elements.namedItem("username");
     first_password = document.getElementById("createForm").elements.namedItem("password");
