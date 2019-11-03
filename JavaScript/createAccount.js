@@ -25,7 +25,7 @@ function getValues(){
     second_password = document.getElementById("createForm").elements.namedItem("confirmPassword");
 }
 
-document.getElementsByName("createAccountBtn").addEventListener('click', getValues);
+document.querySelectorAll('input[type="button"]').addEventListener('click', getValues);
 
 /*Check passwords then create an object, putting it into users array*/
 function createAccount(){
