@@ -5,7 +5,7 @@ var second_password;
 var name;
 var users_index = 0;
 
-var object = function(user, pass){
+var person = function(user, pass){
     this.userName = user;
     this.passWord = pass;
 }
@@ -18,13 +18,13 @@ function passwordCheck(a,b){
     return true;
 }
 
-
-document.querySelector('button[type="button"]').addEventListener('click', function(){
+function getValues(){
     name = document.getElementById("createForm").elements.namedItem("username");
     first_password = document.getElementById("createForm").elements.namedItem("password");
     second_password = document.getElementById("createForm").elements.namedItem("confirmPassword");
-});
+}
 
+document.getElementsByName("createAccountBtn").addEventListener('click', getValues);
 
 /*Check passwords then create an object, putting it into users array*/
 function createAccount(){
@@ -32,7 +32,7 @@ function createAccount(){
         console.log("Passwords dont match");
         return;
     }
-    var user = new object(name,first_password);
+    var user = new person(name,first_password);
     users[user_index] = user;
     user_index++;
 }
