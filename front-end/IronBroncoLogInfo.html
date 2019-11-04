@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="..\JavaScript\logInfo.js"></script>
 <head>
 	<title>Iron Bronco</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="ironbroncostyle.css">
 </head>
+
 <body>
 	<div id="scu_logo">
 		<img src="scu_logos/SCU-Seal_OutlinedRed.png" alt="SCU seal" width="100" height="100">
@@ -20,29 +22,28 @@
 	</div>
 	<div id="loginfo">
 		<h2>Log Information</h2>
-		<form action="/login_information.php"> <!--Click the "Submit" button and the form-data will be sent to a page on the server called "/login_page.php".-->
-			Swim: <input type="number" name="number">
-			<select>
-				<option value="yards">Yards</option>
-				<option value="miles">Miles</option>
-				<option value="kilometers">Kilometers</option>
-			</select>
-			<input type="button" value="Save"><br><br> <!--maybe submit instead of button-->
-			Run: <input type="number" name="number">
-			<select>
-				<option value="yards">Yards</option>
-				<option value="miles">Miles</option>
-				<option value="kilometers">Kilometers</option>
-			</select>
-			<input type="button" value="Save"><br><br> <!--maybe submit instead of button-->
-			Bike: <input type="number" name="number">
-			<select>
-				<option value="yards">Yards</option>
-				<option value="miles">Miles</option>
-				<option value="kilometers">Kilometers</option>
-			</select>
-			<input type="button" value="Save"><br> <!--maybe submit instead of button-->
-		</form>
+		<form>
+				<div class="infoBox">
+					<label for="swim">Swim</label>
+					<input type="number" id="swim" placeholder="Enter here"/>
+				</div>
+				<div class="infoBox">
+					<label for="running">Running</label>
+					<input type="number" id="running" placeholder="Enter here"/>
+				</div>
+				<div class="infoBox">
+					<label for="biking">Biking</label>
+					<input type="number" id="biking" placeholder="Enter here"/>
+				</div>
+				<div class="InfobBox">
+					<button id="infoBtn">Click to submit</button>
+				</div>
+			</form>
+	</div>
+	<div id="clearStorage">
+		<div class="testing">
+			<button id="clearBtn">Clear Local Storage</button>
+		</div>
 	</div>
 	<div id="footer">
 		<a href="IronBroncoLogin.html">LOGOUT</a>
