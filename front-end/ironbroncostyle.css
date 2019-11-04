@@ -52,6 +52,34 @@ p {
 	font-size: 14px;
 }
 
+ul {
+	list-style-type: none;
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	clear: left;
+	clear: right;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: center;
+	padding-right: 50px;
+	padding: 20px;
+	font-size: 16px;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}
+
+li {
+	display: inline;
+}
+
+li a {
+	display: block;
+	padding: 8px;
+	background-color: rgb(69, 91, 104);
+}
+
 #scu_logo {
 	width: 15%;
 	height: 100px;
@@ -95,6 +123,20 @@ p {
 	width: 100%;
 	clear: left;
 	clear: right;
+}
+
+#progress h2 {
+	color: rgb(181, 0, 67);
+	font-size: 40px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+#progress p {
+	margin-left: 20px;
+	color: rgb(181, 0, 67);
+	font-size: 20px;
+	font-family: "Helvetica Neue";
 }
 
 #login {}

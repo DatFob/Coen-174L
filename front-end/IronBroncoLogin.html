@@ -20,13 +20,21 @@
 		<form action="/login_page.php"> <!--Click the "Submit" button and the form-data will be sent to a page on the server called "/login_page.php".-->
 			Username: <input type="text" name="Username"><br>
 			Password: <input type="password" name="Password"><br>
-			<input type="button" value="Log In"> <!--maybe submit instead of button-->
+			<input type="button" value="Log In" onclick="homepage()"> <!--maybe submit instead of button-->
 			<input type="button" value="Create Account" onclick="createaccountpage()">
 		</form>
 	</div>
 	<div id="footer">
 	</div>
 	<script>
+		function homepage()
+		{
+			if (true) { //password and username are valid
+				//go to home/progress page with user's progess
+				//need to store in data structure
+				//window.location = 'IronBroncoHome.html';
+			}
+		}
 		function createaccountpage()
 		{
 			window.location = 'IronBroncoCreateAccount.html';
