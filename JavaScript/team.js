@@ -1,9 +1,6 @@
 //team array to store all teams
 var teams = [];
 var infoTeam;
-var biking = 0;
-var running = 0;
-var swimming = 0;
 var teamIndex = 0;
 
 
@@ -56,18 +53,18 @@ const joinTeam = (ev)=>{
     //traverse thru teams array, find the right team. If not full, set member name and udpate member count
     for(var i=0;i<teams.length;i++){
         if(teams[i].id === teamName){
-            if(memberCnt = 1){
-                teams[i].member2 = mmber;
-                teams[i].memberCnt++;
-                break;
-            }
-            if(memberCnt = 2){
-                teams[i].member3 = mmber;
-                teams[i].memberCnt++;
-                break;
-            }if(memberCnt = 3){
-                console.log('Team is full');
-                break;
+            switch(teams[i].memberCnt){
+                case 1:
+                    teams[i].member2 = mmber;
+                    teams[i].memberCnt++;
+                    break;
+                case 2:
+                    teams[i].member3 = mmber;
+                    teams[i].memberCnt++;
+                    break; 
+                case 3:
+                    window.alert('Team is full!');
+                    break;
             }
         }
     }
@@ -79,26 +76,32 @@ const joinTeam = (ev)=>{
 
 const saveInfo = (ev)=>{
     ev.preventDefault();    
-    //Find out user's team
     let teamName = document.getElementById('logTeamName').value;
     //Grab information from input boxes
-    biking = document.getElementById('biking').value;
-    running = document.getElementById('running').value;
-    swimming = document.getElementById('swim').value;
-    for(var i=0;i<teams.length;i++){
-        if(teams[i].id===teamName){
-            //update team's information
-            teams[i].run = running + teams[i].run;
-            teams[i].swim = swimming + teams[i].run;
-            teams[i].bike = biking + teams[i].bike;
-        }
-    }
+    let bikingTemp = document.getElementById('biking').value;
+    let runningTemp = document.getElementById('running').value;
+    let swimmingTemp = document.getElementById('swim').value;
 
+    //convert Temp (strings) to integer
+    var biking = parseInt(bikingTemp);
+    var running = parseInt(runningTemp);
+    var swimming = parseInt(swimmingTemp);
     //Clear forms
     document.querySelector('form').reset();
-
-    //Save result to localStorage
-    localStorage.setItem('TeamList', JSON.stringify(teams));
+    for ( var x=0;x<teams.length;x++ ){
+        console.log('for llop entered');
+        if(teams[x].id===teamName){
+            //update team's information
+            teams[x].run = running + teams[x].run;
+            teams[x].swim = swimming + teams[x].swim;
+            teams[x].bike = biking + teams[x].bike;
+            console.log(teams[x]);
+            //save result to localStorage
+            localStorage.setItem('NewTeamList', JSON.stringify(teams));
+            //let tempObject = JSON.parse(JSON.stringify(teams[x]));
+        }
+    }
+    
 }
 
 const clearStorage = (ev)=>{

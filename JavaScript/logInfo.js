@@ -9,12 +9,15 @@ var i = 0;
 
 const saveInfo = (ev)=>{
     ev.preventDefault();
+
     //Find out user's team
     let teamName = window.prompt("What team are you in", "Please Enter Here");
+
     //Grab information from input boxes
-    bike = document.getElementById('biking').value;
+    bike = parseInt(document.getElementById('biking').value,10);
     run = document.getElementById('running').value;
     swimming = document.getElementById('swim').value;
+
     /*for(i=0;i<teams.length;i++){
         if(teams[i].id===teamName){
             //update team's information
