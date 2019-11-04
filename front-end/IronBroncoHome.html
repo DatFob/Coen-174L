@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Iron Bronco</title>
+	<title>IronBronco</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="ironbroncostyle.css">
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
 </head>
 <body>
 	<div id="scu_logo">
@@ -12,17 +13,28 @@
 	<div id ="header">
 		<h1>Iron Bronco</h1>
 	</div>
-	<div id="nav_bar">
-		<a href="IronBroncoHome.html">HOME</a>
-		<a href="IronBroncoLogInfo.html">LOG</a>
-		<a href="IronBroncoLeaderboards.html">LEADERBOARDS</a>
-		<a href="IronBroncoJoinTeam.html">JOIN/MANAGE TEAM</a>
-	</div>
+	<ul>
+		<li><a href="IronBroncoHome.html">HOME</a></li>
+		<li><a href="IronBroncoLogInfo.html">LOG</a></li>
+		<li><a href="IronBroncoLeaderboards.html">LEADERBOARDS</a></li>
+		<li><a href="IronBroncoJoinTeam.html">JOIN/MANAGE TEAM</a></li>
+	</ul>
 	<div id="progress">
 		<h2>Progress</h2>
+		<div id="swim"><p>Swim: {{completed}}/2.4</p></div>
+		<div id="run"><p>Run: {{completed}}/26.2</p></div>
+		<div id="bike"><p>Bike: {{completed}}/112</p></div>
 	</div>
 	<div id="footer">
 		<a href="IronBroncoLogin.html">LOGOUT</a>
 	</div>
+	<script>
+		var swimData= {completed: 0}; //need to display the data stored
+		var runData= {completed: 0};
+		var bikeData= {completed: 0};
+		w3.displayObject("swim", swimData);
+		w3.displayObject("run", runData);
+		w3.displayObject("bike", bikeData);
+	</script>
 </body>
 </html>
