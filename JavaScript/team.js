@@ -97,7 +97,7 @@ const saveInfo = (ev)=>{
             teams[x].bike = biking + teams[x].bike;
             console.log(teams[x]);
             //save result to localStorage
-            localStorage.setItem('NewTeamList', JSON.stringify(teams));
+            localStorage.setItem('TeamList', JSON.stringify(teams));
             //let tempObject = JSON.parse(JSON.stringify(teams[x]));
         }
     }
@@ -106,5 +106,5 @@ const saveInfo = (ev)=>{
 
 const clearStorage = (ev)=>{
     ev.preventDefault();
-    localStorage.removeItem('TeamList');
+    localStorage.clear();
 }
