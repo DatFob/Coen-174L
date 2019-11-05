@@ -3,28 +3,35 @@ var teams = [];
 var infoTeam;
 var teamIndex = 0;
 
+/*
+Below are all the event listeners
+*/
 
-//evoke function saveInfo when click the submit button//
+//Once infoBtn is clicked, safeInfo function is evoked
 document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('infoBtn').addEventListener('click',saveInfo);
 });
 
-//Event listener for button Create Team
+//Once newTeamBtn is clicked, createTeam function is evoked
 document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('newTeamBtn').addEventListener('click', createTeam);
 });
 
-//Event listener for button Join Team
+//once joinTeamBtn is clicked, joinTeam function is evoked
 document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('joinTeamBtn').addEventListener('click', joinTeam);
 });
 
-//clear local storage
+//once clearBtn is clicked, clearStorage function is evoked
 document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('clearBtn').addEventListener('click',clearStorage);
 });
 
-//a team object will be created with one member and pushed into teams array
+/*
+Below are all functions connected to eventListener
+*/
+
+//a team object will be created with id as team name and pushed into teams array
 const createTeam = (ev)=>{
     ev.preventDefault();
     let mmber1 = window.prompt("What is your user name?","Please Enter Here");
@@ -46,6 +53,8 @@ const createTeam = (ev)=>{
     localStorage.setItem('TeamList', JSON.stringify(teams));
 }
 
+
+//Ask user to input team name
 const joinTeam = (ev)=>{
     ev.preventDefault();
     let teamName = document.getElementById('teamName').value;
