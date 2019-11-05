@@ -1,0 +1,184 @@
+a {
+	color: White;
+	font-size: 16px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+a:link {
+	color: White;
+	font-family: "Helvetica Neue";
+}
+
+a:visited {
+	color: White;
+	font-family: "Helvetica Neue";
+}
+
+a:hover {
+	color: rgb(181, 0, 67);
+	font-family: "Helvetica Neue";
+}
+
+a:active {
+	color: White;
+	font-family: "Helvetica Neue";
+}
+
+.menubtn {
+	display: none;
+}
+
+body {
+	font-family: "Helvetica Neue";
+}
+
+h1 {
+	color: rgb(181, 0, 67);
+	font-size: 50px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+h2 {
+	color: rgb(181, 0, 67);
+	font-size: 40px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+p {
+	color: black;
+	font-size: 14px;
+}
+
+ul {
+	list-style-type: none;
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	clear: left;
+	clear: right;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: center;
+	padding-right: 50px;
+	padding: 20px;
+	font-size: 16px;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}
+
+li {
+	display: inline;
+}
+
+li a {
+	display: block;
+	padding: 8px;
+	background-color: rgb(69, 91, 104);
+}
+
+#scu_logo {
+	width: 15%;
+	height: 100px;
+	margin-left: 10px;
+	margin-top: 10px;
+	float: left;
+	clear: none;
+}
+
+#header {
+	width: 83%;
+	float: right;
+	clear: none;
+}
+
+#header h1 {
+	color: rgb(181, 0, 67);
+	font-size: 50px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+#nav_bar {
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	clear: left;
+	clear: right;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: center;
+	padding-right: 50px;
+	padding: 20px;
+	font-size: 16px;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}
+
+#userprogress {
+	width: 100%;
+	clear: left;
+	clear: right;
+}
+
+#userprogress h2 {
+	color: rgb(181, 0, 67);
+	font-size: 40px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+#userprogress p {
+	margin-left: 20px;
+	color: rgb(181, 0, 67);
+	font-size: 20px;
+	font-family: "Helvetica Neue";
+}
+
+#teamprogress {
+	width: 100%;
+	clear: left;
+	clear: right;
+}
+
+#teamprogress h2 {
+	color: rgb(181, 0, 67);
+	font-size: 40px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+#teamprogress p {
+	margin-left: 20px;
+	color: rgb(181, 0, 67);
+	font-size: 20px;
+	font-family: "Helvetica Neue";
+}
+
+#login {}
+
+#createaccount {}
+
+#loginfo {}
+
+#jointeam {}
+
+#footer {
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: right;
+	padding-left: 20px;
+	padding-right: 20px;
+	clear: left;
+	font-size: 12pt;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}

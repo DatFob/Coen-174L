@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="ironbronco.js"></script>
+<head>
+	<title>Iron Bronco</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="ironbronco.css">
+</head>
+<body>
+	<div id="scu_logo">
+		<img src="SCU-Seal_OutlinedRed.png" alt="SCU seal" width="100" height="100">
+	</div>
+	<div id ="header">
+		<h1>Iron Bronco</h1>
+	</div>
+	<div id="nav_bar">
+		<a href="IronBroncoHome.html">HOME</a>
+		<a href="IronBroncoLogInfo.html">LOG</a>
+		<a href="IronBroncoLeaderboards.html">LEADERBOARDS</a>
+		<a href="IronBroncoJoinTeam.html">JOIN/MANAGE TEAM</a>
+	</div>
+	<div id="createaccount">
+		<h2>Create Your Account</h2>
+		<form>
+			<div class="formBox">
+				<label for="userName">Username:</label>
+				<input type="text" id="userName" placeholder="UserName"/>
+			</div>
+			<div class="formBox">
+				<label for="password">Password:</label>
+				<input type="password" id="password" placeholder="Password"/>
+			</div>
+			<div class="formBox">
+				<button id="btn">Create Account</button>
+			</div>
+		</form>
+	</div>
+	<div id="login">
+		<h2>Log In</h2>
+		<form>
+			<div class="formBox">
+				<label for="userName">Username:</label>
+				<input type="text" id="userName" placeholder="UserName"/>
+			</div>
+			<div class="formBox">
+				<label for="password">Password:</label>
+				<input type="password" id="password" placeholder="Password"/>
+			</div>
+			<div class="formBox">
+				<button id="btn">Log In</button>
+			</div>
+		</form>
+	</div>
+	<div id="jointeam">
+		<h2>Join Team</h2>
+		<form>
+			<div class="teamBox">
+				<label for="teamName">Team Name:</label>
+				<input type="text" id="teamName" placeholder="TeamName"/>
+			</div>
+			<div class="teamBox">
+				<button id="joinTeamBtn">Join a Team</button>
+			</div>
+			<div class="teamBox">
+				<label for="newTeamName">New Team Name:</label>
+				<input type="text" id="newTeamName" placeholder="newTeamName"/>
+			</div>
+			<div class="teamBox">
+				<button id="newTeamBtn">Create a New Team</button>
+			</div>
+		</form>
+	</div>
+	<div id="loginfo">
+		<h2>Log Information</h2>
+		<form role="infoForm" id="infoForm" data-toggle="validator"> 
+			<div class="infoBox">
+				<label for="swim">Swim</label>
+				<input type="number" id="swim" placeholder="Enter here"/>
+			</div>
+			<div class="infoBox">
+				<label for="running">Running</label>
+				<input type="number" id="running" placeholder="Enter here"/>
+			</div>
+			<div class="infoBox">
+				<label for="biking">Biking</label>
+				<input type="number" id="biking" placeholder="Enter here"/>
+			</div>
+			<div class="infobBox">
+				<button id="infoBtn">Update</button>
+			</div>
+		</form>
+	</div>
+	<div id="userprogress">
+		<h2>User Progress</h2>
+		<div id="userswim"><p>Swim: {{usercompleted}}/2.4</p></div>
+		<div id="userrun"><p>Run: {{usercompleted}}/26.2</p></div>
+		<div id="userbike"><p>Bike: {{usercompleted}}/112</p></div>
+	</div>
+	<div id="teamprogress">
+		<h2>Team Progress</h2>
+		<div id="teamswim"><p>Swim: {{teamcompleted}}/2.4</p></div>
+		<div id="teamrun"><p>Run: {{teamcompleted}}/26.2</p></div>
+		<div id="teambike"><p>Bike: {{teamcompleted}}/112</p></div>
+	</div>
+	<div id="clearStorage">
+		<div class="testing">
+			<button id="clearBtn">Clear Local Storage</button>
+		</div>
+	<div id="footer">
+		<a href="IronBroncoLogin.html">LOGOUT</a>
+	</div>
+</body>
+</html>
