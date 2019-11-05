@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="ironbronco.js"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 <head>
 	<title>Iron Bronco</title>
 	<meta charset="UTF-8">
@@ -21,17 +22,17 @@
 	</div>
 	<div id="createaccount">
 		<h2>Create Your Account</h2>
-		<form>
+		<form id="createForm">
 			<div class="formBox">
 				<label for="userName">Username:</label>
-				<input type="text" id="userName" placeholder="UserName"/>
+				<input type="text" id="loginUserName" placeholder="UserName"/>
 			</div>
 			<div class="formBox">
 				<label for="password">Password:</label>
-				<input type="password" id="password" placeholder="Password"/>
+				<input type="password" id="loginPassword" placeholder="Password"/>
 			</div>
 			<div class="formBox">
-				<button id="btn">Create Account</button>
+				<button id="createBtn">Create Account</button>
 			</div>
 		</form>
 	</div>
@@ -47,7 +48,7 @@
 				<input type="password" id="password" placeholder="Password"/>
 			</div>
 			<div class="formBox">
-				<button id="btn">Log In</button>
+				<button id="loginBtn">Log In</button>
 			</div>
 		</form>
 	</div>
@@ -92,15 +93,18 @@
 	</div>
 	<div id="userprogress">
 		<h2>User Progress</h2>
-		<div id="userswim"><p>Swim: {{usercompleted}}/2.4</p></div>
-		<div id="userrun"><p>Run: {{usercompleted}}/26.2</p></div>
-		<div id="userbike"><p>Bike: {{usercompleted}}/112</p></div>
+		<div id="userSwim"><p>Swim: {{userSwim}}</p></div>
+		<div id="userRun"><p>Run: {{userRun}}</p></div>
+		<div id="userBike"><p>Bike: {{userBike}}</p></div>
 	</div>
 	<div id="teamprogress">
 		<h2>Team Progress</h2>
-		<div id="teamswim"><p>Swim: {{teamcompleted}}/2.4</p></div>
-		<div id="teamrun"><p>Run: {{teamcompleted}}/26.2</p></div>
-		<div id="teambike"><p>Bike: {{teamcompleted}}/112</p></div>
+		<div id="teamSwim"><p>Swim: {{teamSwim}}</p></div>
+		<div id="teamRun"><p>Run: {{teamRun}}</p></div>
+		<div id="teamBike"><p>Bike: {{teamBike}}</p></div>
+	</div>
+	<div id="progress">
+		<button id="progressBtn">Click to view Progress</button>
 	</div>
 	<div id="clearStorage">
 		<div class="testing">
