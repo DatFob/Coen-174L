@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Iron Bronco</title>
+	<title>Iron Bronco Create Account</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="ironbroncostyle.css">
 </head>
@@ -17,14 +17,22 @@
 	</div>
 	<div id="createaccount">
 		<h2>Create Your Account</h2>
-		<form action="/account_page.php"> <!--Click the "Submit" button and the form-data will be sent to a page on the server called "/login_page.php".-->
-			Username: <input type="text" name="Username"><br>
-			Password: <input type="password" name="Password"><br>
-			Confirm Password: <input type="password" name="Password"><br>
-			<input type="button" value="Create Account">
+		<form id="createForm">
+			<div class="formBox">
+				<label for="userName">Username:</label>
+				<input type="text" id="loginUserName" placeholder="UserName"/>
+			</div>
+			<div class="formBox">
+				<label for="password">Password:</label>
+				<input type="password" id="loginPassword" placeholder="Password"/>
+			</div>
+			<div class="formBox">
+				<button id="createBtn">Create Account</button>
+			</div>
+			<div class="formBox">
+				<button id="createBtn">Create Account</button>
+			</div>
 		</form>
-	</div>
-	<div id="footer">
 	</div>
 </body>
 </html>

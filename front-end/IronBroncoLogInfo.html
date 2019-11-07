@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Iron Bronco</title>
+	<title>Iron Bronco Log Info</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="ironbroncostyle.css">
 </head>
@@ -15,33 +15,42 @@
 	<div id="nav_bar">
 		<a href="IronBroncoHome.html">HOME</a>
 		<a href="IronBroncoLogInfo.html">LOG</a>
+		<a href="IronBroncoTeam.html">TEAM</a>
 		<a href="IronBroncoLeaderboards.html">LEADERBOARDS</a>
-		<a href="IronBroncoJoinTeam.html">JOIN/MANAGE TEAM</a>
 	</div>
 	<div id="loginfo">
 		<h2>Log Information</h2>
-		<form action="/login_information.php"> <!--Click the "Submit" button and the form-data will be sent to a page on the server called "/login_page.php".-->
-			Swim: <input type="number" name="number">
-			<select>
-				<option value="yards">Yards</option>
-				<option value="miles">Miles</option>
-				<option value="kilometers">Kilometers</option>
-			</select>
-			<input type="button" value="Save"><br><br> <!--maybe submit instead of button-->
-			Run: <input type="number" name="number">
-			<select>
-				<option value="yards">Yards</option>
-				<option value="miles">Miles</option>
-				<option value="kilometers">Kilometers</option>
-			</select>
-			<input type="button" value="Save"><br><br> <!--maybe submit instead of button-->
-			Bike: <input type="number" name="number">
-			<select>
-				<option value="yards">Yards</option>
-				<option value="miles">Miles</option>
-				<option value="kilometers">Kilometers</option>
-			</select>
-			<input type="button" value="Save"><br> <!--maybe submit instead of button-->
+		<form role="infoForm" id="infoForm" data-toggle="validator"> 
+			<div class="infoBox">
+				<label for="swim">Swim</label>
+				<input type="number" id="swim" placeholder="Enter here"/>
+				<select>
+					<option value="yards">Yards</option>
+					<option value="miles">Miles</option>
+					<option value="kilometers">Kilometers</option>
+				</select>
+			</div>
+			<div class="infoBox">
+				<label for="running">Running</label>
+				<input type="number" id="running" placeholder="Enter here"/>
+				<select>
+					<option value="yards">Yards</option>
+					<option value="miles">Miles</option>
+					<option value="kilometers">Kilometers</option>
+				</select>
+			</div>
+			<div class="infoBox">
+				<label for="biking">Biking</label>
+				<input type="number" id="biking" placeholder="Enter here"/>
+				<select>
+					<option value="yards">Yards</option>
+					<option value="miles">Miles</option>
+					<option value="kilometers">Kilometers</option>
+				</select>
+			</div>
+			<div class="infobBox">
+				<button id="infoBtn">Update</button>
+			</div>
 		</form>
 	</div>
 	<div id="footer">
