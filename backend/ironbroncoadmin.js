@@ -6,3 +6,4 @@ var infoTeam;
 var teamIndex = -1;
 
 //Need to ask TA what is necessary
+var teamIndex = -1;
