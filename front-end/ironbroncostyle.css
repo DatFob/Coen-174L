@@ -51,7 +51,7 @@ h2 {
 p {
 	font-family: "Helvetica Neue";
 	font-style: bold;
-	color: black;
+	color: rgb(69, 91, 104);
 	font-size: 20px;
 }
 
@@ -84,22 +84,19 @@ li a {
 }
 
 #scu_logo {
-	width: 12%;
 	height: 100px;
-	margin-left: 10px;
-	margin-top: 10px;
+	margin-top: 3rem;
 	margin-bottom: 10px;
-	float: left;
-	clear: none;
+	align-self: center;
 }
 
 #header {
-	width: 86%;
+	/*width: 86%;
 	height: 70px;
 	margin-left:10px;
 	margin-top: 30px;
 	margin-bottom: 20px;
-	float: right;
+	/*float: right;*/
 	/*clear: none;*/
 }
 
