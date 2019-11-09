@@ -13,13 +13,40 @@
 		<img src="scu_logos/SCU-Seal_OutlinedRed.png" alt="SCU seal" width="100" height="100">
 	</div>
 	<div id ="header">
-		<h1>Join Team</h1>
+		<h1>Iron Bronco</h1>
 	</div>
-	<div id="nav_bar">
-		<a href="IronBroncoHome.html">HOME</a>
-		<a href="IronBroncoLogInfo.html">LOG</a>
-		<a href="IronBroncoTeam.html">TEAM</a>
-		<a href="IronBroncoLeaderboards.html">LEADERBOARDS</a>
+	<div id="nav_bar" style="padding-bottom: 3rem;">
+	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
+			<!-- <img  class="navbar-brand" src="scu_logos/SCU-Seal_OutlinedRed.png" alt="SCU seal" width="100" height="100"> -->
+			<a class="navbar-brand" href="#">Iron Bronco</a>
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+	  		</button>
+			<div class="navbar-collapse collapse" id="navbarsExampleDefault" style="">
+	    		<ul class="navbar-nav mr-auto">
+	      			<li class="nav-item active">
+	        			<a class="nav-link" href="IronBroncoHome.html">Home<span class="sr-only">(current)</span></a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="IronBroncoLogInfo.html">Log</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="IronBroncoTeam.html">Team</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="IronBroncoLeaderboards.html">Leaderboards</a>
+	      			</li>
+	      			<li class="nav-item dropdown">
+	        			<a class="nav-link dropdown-toggle" role="button" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+	        			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	          				<a class="dropdown-item" href="IronBroncoLogInfo.html">Log Info</a>
+	          				<a class="dropdown-item" href="IronBroncoJoinCreateTeam.html">Join/Create a Team</a>
+	          				<a class="dropdown-item" href="IronBroncoLogin.html">Log Out</a>
+	        			</div>
+	      			</li>
+	    		</ul>
+	  		</div>
+		</nav>
 	</div>
 	<div id="jointeam">
 		<h2>Join Team</h2>
@@ -44,9 +71,6 @@
 				<button id="newTeamBtn">Create a New Team</button>
 			</div>
 		</form>
-	</div>
-	<div id="footer">
-		<a href="IronBroncoLogin.html">LOGOUT</a>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
