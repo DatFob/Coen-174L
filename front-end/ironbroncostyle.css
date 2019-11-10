@@ -42,7 +42,7 @@ select {
 	display: inline-block;
 }
 
-input[type=number], textarea {
+input[type=number], input[type=text], textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -61,6 +61,13 @@ input[type=number], textarea {
   width: 60%;
   margin-top: 6px;
 }
+
+.col-75 {
+  float: left;
+  width: 70%;
+  margin-top: 6px;
+}
+
 .col-15 {
   float: left;
   width: 15%;
