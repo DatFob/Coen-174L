@@ -9,15 +9,8 @@
 	<script src="ironbroncologinfo.js"></script>
 </head>
 <body>
-	<div id="scu_logo">
-		<img src="scu_logos/SCU-Seal_OutlinedRed.png" alt="SCU seal" width="100" height="100">
-	</div>
-	<div id ="header">
-		<h1>Iron Bronco</h1>
-	</div>
 	<div id="nav_bar" style="padding-bottom: 3rem;">
 	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
-			<!-- <img  class="navbar-brand" src="scu_logos/SCU-Seal_OutlinedRed.png" alt="SCU seal" width="100" height="100"> -->
 			<a class="navbar-brand" href="#">Iron Bronco</a>
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -48,38 +41,65 @@
 	  		</div>
 		</nav>
 	</div>
-	<div id="loginfo">
-		<h2>Log Information</h2>
+	<div id="loginfo" class="container" align="center">
+		<h1 style="padding-bottom:3rem;">Log Information</h1>
 		<form role="infoForm" id="infoForm" data-toggle="validator"> 
-			<div class="infoBox">
-				<label for="swim">Swim</label>
-				<input type="number" id="swim" placeholder="Enter here"/>
-				<select>
-					<option value="yards">Yards</option>
-					<option value="miles">Miles</option>
-					<option value="kilometers">Kilometers</option>
-				</select>
+			<div class="container" style="padding:1rem;">
+				<div class="row">
+					<div class="col-25">
+						<label for="swim">Swim</label>
+					</div>
+					<div class="col-60">
+						<input type="number" id="swim" placeholder="Enter here"/>
+					</div>
+					<div class="col-15">
+						<select>
+							<option value="yards">yards</option>
+							<option value="miles">miles</option>					
+							<option value="meters">meters</option>
+							<option value="kilometers">kilometers</option>
+						</select>
+					</div>
+				</div>
 			</div>
-			<div class="infoBox">
-				<label for="running">Running</label>
-				<input type="number" id="running" placeholder="Enter here"/>
-				<select>
-					<option value="yards">Yards</option>
-					<option value="miles">Miles</option>
-					<option value="kilometers">Kilometers</option>
-				</select>
+			<div class="container" style="padding:1rem;">
+				<div class="row">
+					<div class="col-25">
+						<label for="running">Running</label>
+					</div>
+					<div class="col-60">
+						<input type="number" id="running" placeholder="Enter here"/>
+					</div>
+					<div class="col-15">
+						<select>
+							<option value="yards">yards</option>
+							<option value="miles">miles</option>					
+							<option value="meters">meters</option>
+							<option value="kilometers">kilometers</option>
+						</select>
+					</div>
+				</div>
 			</div>
-			<div class="infoBox">
-				<label for="biking">Biking</label>
-				<input type="number" id="biking" placeholder="Enter here"/>
-				<select>
-					<option value="yards">Yards</option>
-					<option value="miles">Miles</option>
-					<option value="kilometers">Kilometers</option>
-				</select>
+			<div class="container" style="padding:1rem;">
+				<div class="row">
+					<div class="col-25">
+						<label for="biking">Biking</label>
+					</div>
+					<div class="col-60">
+						<input type="number" id="biking" placeholder="Enter here"/>
+					</div>
+					<div class="col-15">
+						<select>
+							<option value="yards">yards</option>
+							<option value="miles">miles</option>					
+							<option value="meters">meters</option>
+							<option value="kilometers">kilometers</option>
+						</select>
+					</div>
+				</div>
 			</div>
 			<div class="infobBox">
-				<button id="infoBtn">Update</button>
+				<button id="infoBtn" type="button" class="btn btn-primary">Update</button>
 			</div>
 		</form>
 	</div>
