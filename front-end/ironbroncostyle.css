@@ -29,6 +29,51 @@ a:active {
 	display: none;
 }*/
 
+label {
+	padding: 12px 12px 12px 0;
+	display: inline-block;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+	color: rgb(69, 91, 104);
+	font-size: 20px;
+}
+
+select {
+	display: inline-block;
+}
+
+input[type=number], textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-60 {
+  float: left;
+  width: 60%;
+  margin-top: 6px;
+}
+.col-15 {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row: after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 body {
 	font-family: "Helvetica Neue";
 }
@@ -164,7 +209,7 @@ li a {
 	text-align: center;
 }
 
-#footer {
+/*#footer {
 	display: block;
 	visibility: visible;
 	width: 1045px;
@@ -178,4 +223,4 @@ li a {
 	font-size: 12pt;
 	font-style: bold;
 	font-family: "Helvetica Neue";
-}
+}*/
