@@ -2,9 +2,6 @@
 var users = [];
 //team array to store all teams
 var teams = [];
-var infoTeam;
-var teamIndex = -1;
-
 
 //display team progress, button should not need a button
 //check loginfo page for comments ~ event in loginfo should auotmatically update this page
