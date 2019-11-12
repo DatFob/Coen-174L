@@ -61,7 +61,7 @@ const createTeam = (ev)=>{
         swim: 0,
         run: 0,
         bike: 0,
-        total: swim + run + bike
+        total: 0
     }
     teams.push(team);
 
