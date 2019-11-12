@@ -6,7 +6,9 @@ var password;
 
 //event listener for login
 document.addEventListener('DOMContentLoaded', ()=>{
-    users = localStorage.getItem('UserList');
+    //data stored in local host is in string form, use json.parse to turn it back to array
+    let tempUsers = localStorage.getItem('UserList');
+    users = JSON.parse(tempUsers);
     document.getElementById('signInBtn').addEventListener('click', checkLoginInfo);
     document.getElementById('signInBtn').addEventListener('click', clearInput);
 });
@@ -22,7 +24,9 @@ const checkLoginInfo = (ev)=>{
 	//check to make sure username exists
     userIndex = -1;
     for(var x =0;x<users.length;x++){
-        if(users[x].email === userEmail)
+        console.log('enter for loop');
+        console.log(userEmail)
+        if(users[x].email == userEmail)
         {
             userIndex = x;
             console.log('found user');
