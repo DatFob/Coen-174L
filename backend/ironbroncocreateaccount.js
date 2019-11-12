@@ -15,7 +15,6 @@ const addUser = (ev)=>{
     userPassword = document.getElementById('inputPassword3').value;
     userConfirmPassword = document.getElementById('inputConfirm').value;
     userEmail = document.getElementById('inputEmail3').value;
-    console.log(userName);
 
     //NULL check for all input fields
     if((userName == '') || (userPassword == '') || (userConfirmPassword == '') || (userEmail == '')){
@@ -45,7 +44,7 @@ const addUser = (ev)=>{
         swim: 0,
         run: 0,
         bike: 0,
-        total: swim + run + bike
+        total: 0
     }
 
     users.push(user);
