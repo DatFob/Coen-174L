@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById('signInBtn').addEventListener('click', clearInput);
 });
 
+
 //login page code
 const checkLoginInfo = (ev)=>{
 
@@ -24,12 +25,9 @@ const checkLoginInfo = (ev)=>{
 	//check to make sure username exists
     userIndex = -1;
     for(var x =0;x<users.length;x++){
-        console.log('enter for loop');
-        console.log(userEmail)
         if(users[x].email == userEmail)
         {
             userIndex = x;
-            console.log('found user');
             break;
         }
     }
@@ -55,6 +53,7 @@ function clearInput(){
     document.getElementById('inputEmail3').value = '';
 }
 
-function createCookie(userEmail){
-    document.cookie = userEmail;
+function createCookie(a){
+    document.cookie = "username=" + a;
+    console.log(document.cookie);
 }
