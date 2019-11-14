@@ -3,8 +3,7 @@ var users = [];
 
 //team array to store all teams
 var teams = [];
-var infoTeam;
-var teamIndex = -1;
+
 
 //this log info should also automatically update the progress page
 //maybe have saveInfo event invoke updating to home page as well
@@ -16,8 +15,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 const saveInfo = (ev)=>{
     ev.preventDefault();    
-    var teamName;
+    var teamIndex,teamName;
+    var userIndex;
     let userName = window.prompt("What is your user name?","Please Enter Here");
+
+    //user IsAUser check if user exists, if so set userIndex
+    if(isAUser(userName) == -1){
+        window.alert('User Not Found');
+        document.getElementById('biking').value = '';
+        document.getElementById('running').value = '';
+        document.getElementsByTagName('swim').value = '';
+        return;
+    }else{
+        userIndex = isAUser(userName);
+    }
+
+    teamName = users[userIndex].team;
+    teamIndex = teamIndex(teamName);
+    if(teamIndex == -1){
+        window.alert('System Error finding team, contact support');
+        return;
+    }
+
     //Grab information from input boxes
     let bikingTemp = document.getElementById('biking').value;
     let runningTemp = document.getElementById('running').value;
@@ -28,30 +47,46 @@ const saveInfo = (ev)=>{
     var running = parseInt(runningTemp);
     var swimming = parseInt(swimmingTemp);
 
-    for(var x=0;x<users.length;x++){
-        if(users[x].userName === userName){
-            users[x].run += running;
-            users[x].bike += biking;
-            users[x].swim += swimming; 
-            teamName = users[x].team;
-            localStorage.setItem('UserList',JSON.stringify(users));  
-            break;
+    //Check if values are valid (>0)
+    if(biking < 0 || running < 0 || swimming < 0){
+        window.alert('Please Enter valid values');
+        return;
+    }
+
+    users[userIndex].swim += swimming;
+    users[userIndex].run += running;
+    users[userIndex].bike += biking;
+    users[userIndex].total = users[userIndex].swim + users[userIndex].bike + users[userIndex].run;
+
+    teams[teamIndex].swim += swimming;
+    teams[teamIndex].run += running;
+    teams[teamIndex].bike += biking;
+    teams[teamIndex].total += users[userIndex].total;
+    
+
+    localStorage.setItem('UserList', JSON.stringify(users));
+    localStorage.setItem('TeamList', JSON.stringify(teams));
+}
+
+//if user found eturns userIndex, else return -1
+function isAUser(memberName)
+{
+    for(var x =0;x<users.length;x++){
+        if(users[x].userName == memberName)
+        {
+            return x;
         }
     }
 
-    //Clear forms
-    document.querySelector('form').reset();
-    for ( var x=0;x<teams.length;x++ ){
-        if(teams[x].id===teamName){
-            teamIndex = x;
-            //update team's information
-            teams[x].run = running + teams[x].run;
-            teams[x].swim = swimming + teams[x].swim;
-            teams[x].bike = biking + teams[x].bike;
-            //save result to localStorage
-            localStorage.setItem('TeamList', JSON.stringify(teams));
-            //let tempObject = JSON.parse(JSON.stringify(teams[x]));
+    return -1;
+}
+
+//return team index
+function teamIndex(team){
+    for(var x =0;x<teams.length;x++){
+        if(teams[x].id == team){
+            return x;
         }
     }
-    
+    return -1;
 }

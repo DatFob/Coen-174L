@@ -7,58 +7,41 @@ var teams = [];
 //check loginfo page for comments ~ event in loginfo should auotmatically update this page
 //maybe when the link to this home page is clicked it will be updated
 
-document.addEventListener('DOMContentLoaded', ()=>{
-    document.getElementById('progressBtn').addEventListener('click', display);
-});
 
 function display(){
     var userSwim,userRun,userBike,teamSwim,teamBike,teamRun;
     let userName = window.prompt("What is your user name?", "Please Enter Here");
     let teamName = window.prompt("What is your team name?", "Please Enter Here");
 
-    var noUser = 0;
-    var noTeam = 0;
+    var userIndex = -1;
+    var teamIndex = -1;
     
     for(var x =0;x<users.length;x++){
         if(users[x].userName===userName)
         {
-            noUser++;
+            userIndex = x;
             break;
+        }else{
+            window.alert('User not found!');
+            return;
         }
     }
 
-    if(noUser != 0)
-    {
-    	userSwim = users[x].swim;
-        userRun = users[x].run;
-        userBike = users[x].bike;
-
-    }
-    else
-    {
-    	window.alert('This user does not exist.');
-    	//return;
-    }
+	userSwim = users[userIndex].swim;
+    userRun = users[userIndex].run;
+    userBike = users[userIndex].bike;
+    
 
     for(var y=0;y<teams.length;y++){
         if(teams[y].id === teamName){
-            noTeam++;
+            teamIndex = y;
             break;
+        }else{
+            window.alert('Team Not Found!');
+            return;
         }
     }
 
-    if(noTeam != 0)
-    {
-    	teamSwim = teams[y].swim;
-        teamRun = teams[y].run;
-        teamBike = teams[y].bike;
-
-    }
-    else
-    {
-    	window.alert('This team does not exist.');
-    	//return;
-    }
 
     var userSwimData= {"userSwim" : userSwim}; //need to display the data stored instead of 0
     var userRunData= {"userRun" : userRun};
