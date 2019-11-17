@@ -1,0 +1,187 @@
+label {
+	padding: 12px 12px 12px 0;
+	display: inline-block;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+	color: rgb(69, 91, 104);
+	font-size: 20px;
+}
+
+select {
+	display: inline-block;
+}
+
+input[type=number], input[type=text], textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-60 {
+  float: left;
+  width: 60%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.col-15 {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row: after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+body {
+	font-family: "Helvetica Neue";
+}
+
+h1 {
+	color: rgb(181, 0, 67);
+	font-size: 50px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+	text-align: center;
+}
+
+h2 {
+	color: rgb(181, 0, 67);
+	font-size: 40px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+	text-align: center;
+}
+
+p {
+	font-family: "Helvetica Neue";
+	font-style: bold;
+	color: rgb(69, 91, 104);
+	font-size: 20px;
+}
+
+/*ul {
+	list-style-type: none;
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	clear: left;
+	clear: right;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: center;
+	padding-right: 50px;
+	padding: 20px;
+	font-size: 16px;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}*/
+
+li {
+	display: inline;
+}
+
+li a {
+	display: block;
+	padding: 8px;
+	background-color: rgb(69, 91, 104);
+}
+
+#scu_logo {
+	height: 100px;
+	margin-top: 2rem;
+	margin-bottom: 10px;
+	align-self: center;
+}
+
+#header {
+	/*width: 86%;
+	height: 70px;
+	margin-left:10px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	/*float: right;*/
+	/*clear: none;*/
+}
+
+#header h1 {
+	color: rgb(181, 0, 67);
+	font-size: 50px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+#member1 p {
+	text-align: center;
+}
+
+#member2 p {
+	text-align: center;
+}
+
+#member3 p {
+	text-align: center;
+}
+
+#userprogress p {
+	text-align: center;
+}
+
+#teamprogress p {
+	text-align: center;
+}
+
+/*#nav_bar {
+	display: block;
+	visibility: visible;
+	width: 1045px;
+	float: left;
+	clear: left;
+	clear: right;
+	background-color: rgb(69, 91, 104);
+	margin: auto;
+	text-align: center;
+	padding-right: 50px;
+	padding: 20px;
+	font-size: 16px;
+	font-style: bold;
+	font-family: "Helvetica Neue";
+}*/
+/*
+#progress {
+	width: 100%;
+	clear: left;
+	clear: right;
+}*/
+
+/*#progress h2 {
+	color: rgb(181, 0, 67);
+	font-size: 40px;
+	font-family: "Helvetica Neue";
+	font-style: bold;
+}
+
+#progress p {
+	margin-left: 20px;
+	color: rgb(181, 0, 67);
+	font-size: 20px;
+	font-family: "Helvetica Neue";
+}*/
