@@ -1,0 +1,23 @@
+{
+  "name": "coen-174l",
+  "version": "1.0.0",
+  "description": "Engineering Iron Bronco Management System",
+  "main": "firebase.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DatFob/Coen-174L.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DatFob/Coen-174L/issues"
+  },
+  "homepage": "https://github.com/DatFob/Coen-174L#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "googleapis": "^45.0.0"
+  }
+}
