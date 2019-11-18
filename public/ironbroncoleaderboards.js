@@ -31,3 +31,11 @@ function displayTeamLeaderboard() {
     teams[1].id + " " + teams[1].total + "miles" + "<br>" +
     teams[2].id + " " + teams[2].total + "miles";
 }
+
+function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+      sessionStorage.clear();
+}
