@@ -1,0 +1,16 @@
+{
+    "client": {
+        "id": "1042080648547-aauefq55pncnlprn62j0avqj8c8i5a1n.apps.googleusercontent.com",
+        "secret": "VMf6z8rsN0vwC7bKFXF7u7jc",
+        "redirect": "https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html"
+    },
+
+    // Don't change the code below this line
+
+    "credentials": {
+        "access_token": "your access_token",
+        "token_type": "Bearer",
+        "expires_in": 3600,
+        "refresh_token": "your refresh_token"
+    }
+}
