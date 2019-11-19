@@ -1,6 +1,34 @@
 /* Each account will be created as an object with attributes of userName and passWord*/
-var userEmail, userName;
+// import "firebase/firestore";
+// import "firebase/app";
+// import * as firebase from "firebase/app";
 
+var userEmail, userName;
+const firebaseConfig = {
+  apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
+  authDomain: "test-login-1573079166139.firebaseapp.com",
+  databaseURL: "https://test-login-1573079166139.firebaseio.com",
+  projectId: "test-login-1573079166139",
+  storageBucket: "test-login-1573079166139.appspot.com",
+  messagingSenderId: "1042080648547",
+  appId: "1:1042080648547:web:42a92c14b913d229909756",
+  measurementId: "G-WQ9Z1673RK"
+};
+var project = firebase.initializeApp(firebaseConfig);
+var firestore = project.firestore();
+const docRef = firestore.doc('users/Test');
+
+saveBtn.addEventLisener("click", function(){
+    const textToSave = "Testing..Testing";
+    console.log('Save Data function evoked');
+    docRef.set({
+        keyword: textToSave
+    }).then(function(){
+      console.log('success'); 
+    }).catch(function(error){
+      console.log('error occured');
+    });
+})
 //login page code
 // const checkLoginInfo = (ev)=>{
 //     ev.preventDefault();
