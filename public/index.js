@@ -18,62 +18,49 @@ var project = firebase.initializeApp(firebaseConfig);
 var firestore = project.firestore();
 const docRef = firestore.doc('users/Test');
 
-document.getElementById("saveBtn").addEventListener("click", function(){
-    const textToSave = "Testing..Testing";
-    console.log('Save Data function evoked');
-    docRef.set({
-        keyword: textToSave
-    }).then(function(){
-      console.log('success'); 
-    }).catch(function(error){
-      console.log('error occured');
-    });
-})
-//login page code
-// const checkLoginInfo = (ev)=>{
-//     ev.preventDefault();
+/*var el = document.getElementById('infoBtn');
+if(el){
+  el.addEventListener('click', saveMileInfo, false);
+}*/
+//document.getElementById('infoBtn').addEventListener("click", saveMileInfo);
+function saveMileInfo(){
+  var biking = document.getElementById('biking').value;
+  var running = document.getElementById('running').value;
+  var swimming = document.getElementsByTagName('swim').value;
+  var ToTal = biking + running + swimming;
 
-//     //check if username exists
-//     var userIndex = -1;
-//     for(var x =0;x<users.length;x++){
-//         if(users[x].userName === userName)
-//         {
-//             userIndex = x;
-//             break;
-//         }
-//     }
+  console.log('Save Data function evoked');
+  firestore.collection("users").doc(userName).set({
+      name: userName,
+      email: userEmail,
+      team: '',
+      swim: swim+=swimming,
+      run: run+=running,
+      bike: bike+=biking,
+      total: total+=ToTal
+  }).then(function(){
+    console.log('success'); 
+  }).catch(function(error){
+    console.log('error occured');
+  });
+}
 
-//     if (userIndex == -1)
-//     {
-//         var profile = googleUser.getBasicProfile();
-//         let userID = profile.getId();
-//         let userEmail = profile.getEmail();
-//         let userName = profile.getName();
-
-//         console.log(userName);
-
-//         let user = {
-//             email:userEmail,
-//             username: userName,
-//             tempID: userID,
-//             team: '', //set team when join team or create team
-//             swim: 0,
-//             run: 0,
-//             bike: 0,
-//             total: swim + run + bike
-//         }
-
-//         users.push(user);
-
-//         //saving to local storage
-//         localStorage.setItem('UserList', JSON.stringify(users));
-//     }
-// }
-
-// function clearInput(){
-//     document.getElementById('inputPassword3').value = '';
-//     document.getElementById('inputEmail3').value = '';
-// }
+function saveLoginInfo(userName, userEmail){
+  console.log('Save Data function evoked');
+  firestore.collection("users").doc(userName).set({
+      name: userName,
+      email: userEmail,
+      team: '',
+      swim: 0,
+      run: 0,
+      bike: 0,
+      total: 0
+  }).then(function(){
+    console.log('success'); 
+  }).catch(function(error){
+    console.log('error occured');
+  });
+}
 
 function onSignIn(googleUser) 
 {
@@ -86,6 +73,7 @@ function onSignIn(googleUser)
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     userEmail = profile.getEmail();
     userName = profile.getName();
+    saveLoginInfo(userName,userEmail);
     handleClientLoad();
     // document.location.href="https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html";
     // storeUser();
@@ -107,7 +95,9 @@ function onSignIn(googleUser) {
   console.log('Family Name: ' + profile.getFamilyName());
   console.log("Image URL: " + profile.getImageUrl());
   console.log("Email: " + profile.getEmail());
-
+  userEmail = profile.getEmail();
+  userName = profile.getName();
+  saveLoginInfo(userName,userEmail);
   // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);
@@ -138,6 +128,9 @@ function signOut() {
 
 function verifyIdToken(id_token)
 {
+  userEmail = profile.getEmail();
+  userName = profile.getName();
+  saveLoginInfo(userName,userEmail);
     const {OAuth2Client} = require('google-auth-library');
     const client = new OAuth2Client(CLIENT_ID);
     async function verify()
