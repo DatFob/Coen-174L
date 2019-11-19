@@ -18,7 +18,7 @@ var project = firebase.initializeApp(firebaseConfig);
 var firestore = project.firestore();
 const docRef = firestore.doc('users/Test');
 
-saveBtn.addEventLisener("click", function(){
+document.getElementById("saveBtn").addEventListener("click", function(){
     const textToSave = "Testing..Testing";
     console.log('Save Data function evoked');
     docRef.set({
