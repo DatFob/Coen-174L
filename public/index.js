@@ -3,6 +3,12 @@
 // import "firebase/app";
 // import * as firebase from "firebase/app";
 
+/*document.getElementById("saveBtn").addEventListener("click", function(){
+  console.log('before local storage');
+  localStorage.setItem('userName', 'come on ');
+  console.log('after local storage ')
+})*/
+
 var userEmail, userName;
 const firebaseConfig = {
   apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -18,10 +24,7 @@ var project = firebase.initializeApp(firebaseConfig);
 var firestore = project.firestore();
 const docRef = firestore.doc('users/Test');
 
-/*var el = document.getElementById('infoBtn');
-if(el){
-  el.addEventListener('click', saveMileInfo, false);
-}*/
+
 //document.getElementById('infoBtn').addEventListener("click", saveMileInfo);
 function saveMileInfo(){
   var biking = document.getElementById('biking').value;
@@ -30,6 +33,7 @@ function saveMileInfo(){
   var ToTal = biking + running + swimming;
 
   console.log('Save Data function evoked');
+  console.log(userName);
   firestore.collection("users").doc(userName).set({
       name: userName,
       email: userEmail,
@@ -97,6 +101,8 @@ function onSignIn(googleUser) {
   console.log("Email: " + profile.getEmail());
   userEmail = profile.getEmail();
   userName = profile.getName();
+  localStorage.setItem('userName', JSON.stringify((userName)));
+  localStorage.setItem('email',JSON.stringify(userEmail));
   saveLoginInfo(userName,userEmail);
   // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
@@ -131,6 +137,7 @@ function verifyIdToken(id_token)
   userEmail = profile.getEmail();
   userName = profile.getName();
   saveLoginInfo(userName,userEmail);
+
     const {OAuth2Client} = require('google-auth-library');
     const client = new OAuth2Client(CLIENT_ID);
     async function verify()
