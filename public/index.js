@@ -47,38 +47,54 @@ var userEmail, userName;
 //     document.getElementById('inputEmail3').value = '';
 // }
 
-// function onSignIn(googleUser) 
-// {
-//     var id_token = googleUser.getAuthResponse().id_token;
-//     verifyIdToken(id_token);
-//     var profile = googleUser.getBasicProfile();
-//     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//     console.log('Name: ' + profile.getName());
-//     console.log('Image URL: ' + profile.getImageUrl());
-//     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-//     userEmail = profile.getEmail();
-//     userName = profile.getName();
-//     handleClientLoad();
-//     // document.location.href="https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html";
-//     // storeUser();
-//     var myUserEntity = {};
-//     myUserEntity.id = profile.getId();
-//     myUserEntity.name = profile.getName();
+function onSignIn(googleUser) 
+{
+    var id_token = googleUser.getAuthResponse().id_token;
+    verifyIdToken(id_token);
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    userEmail = profile.getEmail();
+    userName = profile.getName();
+    handleClientLoad();
+    // document.location.href="https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html";
+    // storeUser();
+    var myUserEntity = {};
+    myUserEntity.id = profile.getId();
+    myUserEntity.name = profile.getName();
 
-//     sessionStorage.setItem('myUserEntity',JSON.stringify(myUserEntity));
+    sessionStorage.setItem('myUserEntity',JSON.stringify(myUserEntity));
 
-//     alert(profile.getName());
-// }
-
-function checkIfLoggedIn(){
-  if(sessionStorage.getItem('myUserEntity') == null) {
-    window.location.href = 'https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
-  }
-  else {
-    var userEntity = {};
-    userEntity = JSON.parse(sessionStorage.getItem('myUserEntity'));
-  }
+    alert(profile.getName());
 }
+
+function onSignIn(googleUser) {
+  // Useful data for your client-side scripts:
+  var profile = googleUser.getBasicProfile();
+  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+  console.log('Full Name: ' + profile.getName());
+  console.log('Given Name: ' + profile.getGivenName());
+  console.log('Family Name: ' + profile.getFamilyName());
+  console.log("Image URL: " + profile.getImageUrl());
+  console.log("Email: " + profile.getEmail());
+
+  // The ID token you need to pass to your backend:
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log("ID Token: " + id_token);
+  return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
+}
+
+// function checkIfLoggedIn(){
+//   if(sessionStorage.getItem('myUserEntity') == null) {
+//     window.location.href = 'https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
+//   }
+//   else {
+//     var userEntity = {};
+//     userEntity = JSON.parse(sessionStorage.getItem('myUserEntity'));
+//   }
+// }
 
 function signOut() {
       var auth2 = gapi.auth2.getAuthInstance();
@@ -88,9 +104,9 @@ function signOut() {
       sessionStorage.clear();
 }
 
-function handleClientLoad(){
-    gapi.load('client:auth2', initClient);
-}
+// function handleClientLoad(){
+//     gapi.load('client:auth2', initClient);
+// }
 
 function verifyIdToken(id_token)
 {

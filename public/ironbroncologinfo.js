@@ -4,7 +4,6 @@ var users = [];
 //team array to store all teams
 var teams = [];
 
-
 //this log info should also automatically update the progress page
 //maybe have saveInfo event invoke updating to home page as well
 
@@ -92,9 +91,14 @@ function teamIndex(team){
 }
 
 function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
         console.log('User signed out.');
-      });
-      sessionStorage.clear();
+    });
+}
+
+function onLoad() {
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+    });
 }
