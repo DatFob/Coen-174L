@@ -21,6 +21,21 @@ function getInfo(){
     console.log(userEmail);
 }
 
+var docRef = firestore.collection("users").doc(userName);
+
+function teamToUser(){
+    return firestore.collection("users").doc(userName).update({
+        team: teamName 
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+}
+
 function createTeam(){
     teamName = document.getElementById('newTeamName').value;
     console.log('Save Data function evoked');
@@ -28,14 +43,21 @@ function createTeam(){
         name: teamName,
         member1: userName,
         member2: '',
-        member3: ''
+        member3: '',
+        swim: 0,
+        run: 0,
+        bike: 0,
+        total: 0
     }).then(function(){
-      console.log('success'); 
+        console.log('success'); 
     }).catch(function(error){
-      console.log('error occured');
+        console.log('error occured');
     });
+    teamToUser();
 }
-  
+
+
+
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
