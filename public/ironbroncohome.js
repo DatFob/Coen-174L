@@ -21,7 +21,7 @@ const firebaseConfig = {
 var project = firebase.initializeApp(firebaseConfig);
 var db = project.firestore();
 var userRef = db.collection("users").doc(userName);
-var teamRef = db.collection("teams").doc(teamName);
+var teamDocRef = db.collection("teams");
 
 
 function userData(){
@@ -33,7 +33,7 @@ function userData(){
             userSwimming = doc.data().swim;
             userTotal = doc.data().total;
             teamName = doc.data().team;
-            teamData();
+            teamData(teamName);
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -43,7 +43,9 @@ function userData(){
     });
 }
 
-function teamData(){
+
+function teamData(teamName){
+    var teamRef = teamDocRef.doc(teamName);
     teamRef.get().then(function(doc) {
         if (doc.exists) {
             console.log("Team data received");
