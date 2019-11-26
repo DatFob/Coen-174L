@@ -3,11 +3,7 @@
 // import "firebase/app";
 // import * as firebase from "firebase/app";
 
-/*document.getElementById("saveBtn").addEventListener("click", function(){
-  console.log('before local storage');
-  localStorage.setItem('userName', 'come on ');
-  console.log('after local storage ')
-})*/
+
 
 var userEmail, userName;
 const firebaseConfig = {
