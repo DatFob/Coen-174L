@@ -23,9 +23,10 @@ function saveLoginInfo(userName, userEmail){
   userRef.get().then((docSnapshot) => {
     if (docSnapshot.exists) {
       userRef.onSnapshot((doc) => {
-          console.log(".........................................................");
+          console.log("user exists, will not create a new account...");
       });
     } else {
+      console.log("user does not exist, saving new user to database..");
       userRef.set({
         name: userName,
         email: userEmail,
