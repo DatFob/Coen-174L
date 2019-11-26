@@ -28,9 +28,10 @@ function saveLoginInfo(userName, userEmail){
   userRef.get().then((docSnapshot) => {
     if (docSnapshot.exists) {
       userRef.onSnapshot((doc) => {
-          console.log(".........................................................");
+          console.log("user exists, will not create a new account...");
       });
     } else {
+      console.log("user does not exist, saving new user to database..");
       userRef.set({
         name: userName,
         email: userEmail,
@@ -85,7 +86,7 @@ function onSignIn(googleUser) {
   // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);
-  return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
+  //return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
 }
 
 function signOut() {
