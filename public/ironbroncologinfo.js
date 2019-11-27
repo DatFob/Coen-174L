@@ -1,61 +1,107 @@
 /* Each account will be created as an object with attributes of userName and passWord*/
+var userEmail = JSON.parse(localStorage.getItem('email'));
+var userName = JSON.parse(localStorage.getItem('userName'));
+var userBiking, userRunning, userSwimming;
+var teamName, teamBiking, teamRunning, teamSwimming;
+var biking, running, swimming;
 
-var userName,userEmail;
-var userEmail, userName;
 const firebaseConfig = {
-  apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
-  authDomain: "test-login-1573079166139.firebaseapp.com",
-  databaseURL: "https://test-login-1573079166139.firebaseio.com",
-  projectId: "test-login-1573079166139",
-  storageBucket: "test-login-1573079166139.appspot.com",
-  messagingSenderId: "1042080648547",
-  appId: "1:1042080648547:web:42a92c14b913d229909756",
-  measurementId: "G-WQ9Z1673RK"
+    apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
+    authDomain: "test-login-1573079166139.firebaseapp.com",
+    databaseURL: "https://test-login-1573079166139.firebaseio.com",
+    projectId: "test-login-1573079166139",
+    storageBucket: "test-login-1573079166139.appspot.com",
+    messagingSenderId: "1042080648547",
+    appId: "1:1042080648547:web:42a92c14b913d229909756",
+    measurementId: "G-WQ9Z1673RK"
 };
+
 var project = firebase.initializeApp(firebaseConfig);
-var firestore = project.firestore();
+var db = project.firestore();
+var userRef = db.collection("users").doc(userName);
+var teamDocRef = db.collection("teams");
 
-function getInfo(){
-    userName = JSON.parse(localStorage.getItem('userName'));
-    userEmail = JSON.parse(localStorage.getItem('email'));
-    console.log(userName);
-    console.log(userEmail);
+function userData(){
+    userRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("User data received");
+            userRunning = doc.data().run;
+            userBiking = doc.data().bike;
+            userSwimming = doc.data().swim;
+            teamName = doc.data().team;
+            teamData(teamName);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 }
 
-function updateMiles(){
-    var biking = parseInt(document.getElementById('biking').value);
-    var running = parseInt(document.getElementById('running').value);
-    var swimming = parseInt(document.getElementById('swim').value);
-    var ToTal = biking + running + swimming;
-    console.log('Save Data function evoked');
-    firestore.collection("users").doc(userName).set({
-      name: userName,
-      email: userEmail,
-      team: userTeam,
-      swim: swimming,
-      run: running,
-      bike: biking,
-      total: ToTal
-  }).then(function(){
-    console.log('success'); 
-  }).catch(function(error){
-    console.log('error occured');
-  });
-  firestore.collection("teams").doc(userTeam).set({
-      name: userName,
-      email: userEmail,
-      team: '',
-      swim: swimming,
-      run: running,
-      bike: biking,
-      total: ToTal
-  }).then(function(){
-    console.log('success'); 
-  }).catch(function(error){
-    console.log('error occured');
-  });
+function teamData(teamName){
+    var teamRef = teamDocRef.doc(teamName);
+    teamRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Team data received");
+            teamRunning = doc.data().run;
+            teamBiking = doc.data().bike;
+            teamSwimming = doc.data().swim;
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 }
 
+function updateUserMileageInfo(userName){
+    var tempBike, tempRun, tempSwim, tempTotal;
+    tempBike = biking + userBiking;
+    tempRun = running + userRunning;
+    tempSwim = swimming + userSwimming;
+    tempTotal = tempBike + tempRun + tempSwim;
+    db.collection("users").doc(userName).set({
+        name: userName,
+        email: userEmail,
+        team: teamName,
+        swim: tempSwim,
+        run: tempRun,
+        bike: tempBike,
+        total: tempTotal
+    }).then(function(){
+        console.log('success'); 
+    }).catch(function(error){
+        console.log('error occured');
+    });
+}
+
+function updateTeamMileageInfo(teamName){
+    var tempBike, tempRun, tempSwim, tempTotal;
+    tempBike = biking + teamBiking;
+    tempRun = running + teamRunning;
+    tempSwim = swimming + teamSwimming;
+    tempTotal = tempBike + tempRun + tempSwim;
+    db.collection("teams").doc(teamName).set({
+        swim: tempSwim,
+        run: tempRun,
+        bike: tempBike,
+        total: tempTotal
+    }).then(function(){
+        console.log('success'); 
+    }).catch(function(error){
+        console.log('error occured');
+    });
+}
+
+function updateMileage(){
+    biking = parseInt(document.getElementById('biking').value);
+    running = parseInt(document.getElementById('running').value);
+    swimming = parseInt(document.getElementById('swim').value);
+    updateUserMileageInfo(userName);
+    updateTeamMileageInfo(teamName);
+}
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
@@ -69,95 +115,3 @@ function onLoad() {
         gapi.auth2.init();
     });
 }
-
-
-// var users = [];
-
-// //team array to store all teams
-// var teams = [];
-
-// //this log info should also automatically update the progress page
-// //maybe have saveInfo event invoke updating to home page as well
-
-// //evoke function saveInfo when click the submit button//
-// document.addEventListener('DOMContentLoaded', ()=>{
-//     document.getElementById('infoBtn').addEventListener('click',saveInfo);
-// });
-
-// const saveInfo = (ev)=>{
-//     ev.preventDefault();    
-//     var teamIndex,teamName;
-//     var userIndex;
-//     let userName = window.prompt("What is your user name?","Please Enter Here");
-
-//     //user IsAUser check if user exists, if so set userIndex
-//     if(isAUser(userName) == -1){
-//         window.alert('User Not Found');
-//         document.getElementById('biking').value = '';
-//         document.getElementById('running').value = '';
-//         document.getElementsByTagName('swim').value = '';
-//         return;
-//     }else{
-//         userIndex = isAUser(userName);
-//     }
-
-//     teamName = users[userIndex].team;
-//     teamIndex = teamIndex(teamName);
-//     if(teamIndex == -1){
-//         window.alert('System Error finding team, contact support');
-//         return;
-//     }
-
-//     //Grab information from input boxes
-//     let bikingTemp = document.getElementById('biking').value;
-//     let runningTemp = document.getElementById('running').value;
-//     let swimmingTemp = document.getElementById('swim').value;
-
-//     //convert Temp (strings) to integer
-//     var biking = parseInt(bikingTemp);
-//     var running = parseInt(runningTemp);
-//     var swimming = parseInt(swimmingTemp);
-
-//     //Check if values are valid (>0)
-//     if(biking < 0 || running < 0 || swimming < 0){
-//         window.alert('Please Enter valid values');
-//         return;
-//     }
-
-//     users[userIndex].swim += swimming;
-//     users[userIndex].run += running;
-//     users[userIndex].bike += biking;
-//     users[userIndex].total = users[userIndex].swim + users[userIndex].bike + users[userIndex].run;
-
-//     teams[teamIndex].swim += swimming;
-//     teams[teamIndex].run += running;
-//     teams[teamIndex].bike += biking;
-//     teams[teamIndex].total += users[userIndex].total;
-    
-
-//     localStorage.setItem('UserList', JSON.stringify(users));
-//     localStorage.setItem('TeamList', JSON.stringify(teams));
-// }
-
-// //if user found eturns userIndex, else return -1
-// function isAUser(memberName)
-// {
-//     for(var x =0;x<users.length;x++){
-//         if(users[x].userName == memberName)
-//         {
-//             return x;
-//         }
-//     }
-
-//     return -1;
-// }
-
-// //return team index
-// function teamIndex(team){
-//     for(var x =0;x<teams.length;x++){
-//         if(teams[x].id == team){
-//             return x;
-//         }
-//     }
-//     return -1;
-// }
