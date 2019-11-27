@@ -4,6 +4,7 @@ var userName = JSON.parse(localStorage.getItem('userName'));
 var userBiking, userRunning, userSwimming;
 var teamName, teamBiking, teamRunning, teamSwimming;
 var biking, running, swimming;
+var teamMember1, teamMember2, teamMember3;
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -47,6 +48,9 @@ function teamData(teamName){
             teamRunning = doc.data().run;
             teamBiking = doc.data().bike;
             teamSwimming = doc.data().swim;
+            teamMember1 = doc.data().member1;
+            teamMember2 = doc.data().member2;
+            teamMember3 = doc.data().member3;
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -84,6 +88,10 @@ function updateTeamMileageInfo(teamName){
     tempSwim = swimming + teamSwimming;
     tempTotal = tempBike + tempRun + tempSwim;
     db.collection("teams").doc(teamName).set({
+        member1: teamMember1,
+        member2: teamMember2,
+        member3: teamMember3,
+        name: teamName,
         swim: tempSwim,
         run: tempRun,
         bike: tempBike,
@@ -101,6 +109,13 @@ function updateMileage(){
     swimming = parseInt(document.getElementById('swim').value);
     updateUserMileageInfo(userName);
     updateTeamMileageInfo(teamName);
+    // var notify = $.notify({
+    //     title: userName,
+    //     message: "Your progress has been updated"
+    // },{
+    //     type: 'danger'
+    // });
+    // return notify;
 }
 
 function signOut() {
