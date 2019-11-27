@@ -60,9 +60,6 @@ function teamData(teamName){
 
 function displayProgress()
 {
-    userData();
-    teamData(teamName);
-
     document.getElementById("userSwim").innerHTML = userSwimming + "/2.4";
     document.getElementById("userRun").innerHTML = userRunning + "/26.2";
     document.getElementById("userBike").innerHTML = userBiking + "/112";

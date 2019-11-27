@@ -1,151 +1,153 @@
-/* Each account will be created as an object with attributes of userName and passWord*/
-var users = [];
-//team array to store all teams
-var teams = [];
+var userEmail, userName, newTeamName, joinTeamName, memberCount;
 
-//Event listener for button Create Team
-document.addEventListener('DOMContentLoaded', ()=>{
-    document.getElementById('newTeamBtn').addEventListener('click', createTeam);
-    document.getElementById('newTeamBtn').addEventListener('click',clearNewTeam);
-    document.getElementById('joinTeamBtn').addEventListener('click',clearJoinTeam);
-    document.getElementById('joinTeamBtn').addEventListener('click',joinTeam);
-});
+const firebaseConfig = {
+  apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
+  authDomain: "test-login-1573079166139.firebaseapp.com",
+  databaseURL: "https://test-login-1573079166139.firebaseio.com",
+  projectId: "test-login-1573079166139",
+  storageBucket: "test-login-1573079166139.appspot.com",
+  messagingSenderId: "1042080648547",
+  appId: "1:1042080648547:web:42a92c14b913d229909756",
+  measurementId: "G-WQ9Z1673RK"
+};
 
+var project = firebase.initializeApp(firebaseConfig);
+var firestore = project.firestore();
 
-//Function to clear input fields
-function clearNewTeam(){
-    document.getElementById('newTeamName').value = '';
+function getInfo(){
+    userName = JSON.parse(localStorage.getItem('userName'));
+    userEmail = JSON.parse(localStorage.getItem('email'));
+    console.log(userName);
+    console.log(userEmail);
 }
 
-function clearJoinTeam(){
-    document.getElementById('teamName').value = '';
-}
+var userCollection = firestore.collection("users");
+//var userRef = userCollection.doc(userName);
 
-//a team object will be created with one member and pushed into teams array
-const createTeam = (ev)=>{
-    ev.preventDefault();
-    var promptBox = prompt("Please Enter Your Username:", "Enter Here");
-    if(promptBox == null || promptBox == ''){
-        window.alert('Please Enter A Your Username');
-        return;
-    }
-    else{
-        mmber1=promptBox;
-    }
-
-    //check to make sure member exists
-    var userIndex = -1;
-    if(isAUser(mmber1)== -1){
-        window.alert('User does not Exist..');
-        return;
-    }else{
-        userIndex = isAUser(mmber1);
-    }
-
-    let tempTeamName = document.getElementById('newTeamName').value;
-    
-    for(var i=0;i<teams.length;i++){
-        if(teams[i].id === tempTeamName){
-            window.alert('This team name is taken.');
-            return;
+function checkTeam(){
+    console.log("Check Team Function Evoked...");
+    firestore.collection("users").doc(userName).get().then(function(doc) {
+        if (doc.exists) {
+            if(doc.data().team == '' || doc.data().team == null){
+                console.log("User does not have a team...");
+                return false;
+            }
+            else{
+                console.log("User has a team...");
+                return true;
+            }
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such user...");
         }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+function teamToUser(teamName){
+    return firestore.collection("users").doc(UserName).update({
+        team: teamName 
+    })
+    .then(function() {
+        console.log("Team name successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+}
+
+function createTeam(){
+    if(checkTeam == true){
+        console.log("Unable to create team, you're already in a team...");
+        return;
     }
-
-    //set team element in user to the new team name
-    users[userIndex].team = tempTeamName;
-
-    //Create a new team object with new teamname and member1
-    let team = {
-        id:tempTeamName,
-        memberCnt: 1,
-        member1: mmber1,
+    newTeamName = document.getElementById('newTeamName').value;
+    console.log('Create team function evoked');
+    firestore.collection("teams").doc(newTeamName).set({
+        name: newTeamName,
+        member1: userName,
         member2: '',
-        member3: '',
+        member3: '',    
         swim: 0,
         run: 0,
         bike: 0,
-        total: 0
-    }
-    //update team data
-    team.bike = users[userIndex].bike;
-    team.run = users[userIndex].run;
-    team.swim = users[userIndex].swim;
-    team.total = users[userIndex].total; 
-    teams.push(team);
-
-    //saving to local storage
-    localStorage.setItem('TeamList', JSON.stringify(teams));
-    localStorage.setItem('UserList', JSON.stringify(users));
+        total: 0,
+        memberCnt: 1
+    }).then(function(){
+        console.log('success'); 
+    }).catch(function(error){
+        console.log('error occured');
+    });
+    teamToUser(newTeamName);
 }
 
-const joinTeam = (ev)=>{
-    ev.preventDefault();
-    var teamIndex = -1;
-    var userIndex;
-    let teamName = document.getElementById('teamName').value;
-    let mmber = window.prompt("What is your user name?", "Please Enter Here");
-    if(isAMember(mmber)==-1){
-        window.alert("User does not exist");
-        return;
-    }else{
-        userIndex = isAMember(mmber);
-    }
-
-    //check if user has a team already
-    if(users[userIndex].team !== '' || users[userIndex].team !==null){
-        window.alert('User is already in a team');
-        return; 
-    }
-
-
-    for(var x =0;x<teams.length;x++){
-        if(teams[x].id === teamName){
-            teamIndex = x;
-        }
-    }
-    if(teamIndex === -1){
-        window.alert('cannot find team...');
+function joinTeam(){
+    if(checkTeam == true){
+        console.log("Unable to create team, you're already in a team...");
         return;
     }
+    joinTeamName = getElementById('teamName').value;
+    if(isTeamFull(joinTeamName) = true){
+        console.log("Error: Team name DNE or Team is full");
+        return;
+    }
+    setJoinMember();
+}
 
-    switch(teams[teamIndex].memberCnt){
-        case 1:
-            teams[teamIndex].member2 = mmber;
-            teams[teamIndex].memberCnt++;
-            teams[teamIndex].run += users[userIndex].run;
-            teams[teamIndex].bike += users[userIndex].bike;
-            teams[teamIndex].swim += users[userindex].swim;
-            users[userIndex].team = teamName;
-            break;
-        case 2:
-            teams[teamIndex].member3 = mmber;
-            teams[teamIndex].memberCnt++;
-            teams[teamIndex].run += users[userIndex].run;
-            teams[teamIndex].bike += users[userIndex].bike;
-            teams[teamIndex].swim += users[userindex].swim;
-            users[userIndex].team = teamName;
-            break; 
-        case 3:
-            window.alert('Team is full!');
-            return;
+function setJoinMember(){
+    if(memberCount == 1){
+        return firestore.collection("teams").doc(joinTeamName).update({
+            member2: userName,
+            memberCnt: 2
+        })
+        .then(function() {
+            console.log("New team member successfully added!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error adding second member: ", error);
+        });
+    }else if(memberCount == 2){
+        return firestore.collection("teams").doc(joinTeamName).update({
+            member3: userName,
+            memberCnt: 3
+        })
+        .then(function() {
+            console.log("New team member successfully added!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error adding last member: ", error);
+        });
+    }
+    teamToUser(joinTeamName);
+}
+
+//return true if team is full else return false
+
+function isTeamFull(teamName){
+    firestore.collection("teams").doc(teamName).get().then(function(doc) {
+        if (doc.exists) {
+            if(doc.memberCnt == 3){
+                console.log("team has 3 members...");
+                return true;
             }
-    //document.querySelector('joinForm').reset;
-    localStorage.setItem('UserList', JSON.stringify(users));
-    localStorage.setItem('TeamList', JSON.stringify(teams));
-}
-
-//if user found eturns userIndex, else return -1
-function isAUser(memberName)
-{
-    for(var x =0;x<users.length;x++){
-        if(users[x].userName == memberName)
-        {
-            return x;
+            else{
+                memberCount = doc.memberCnt;
+                return false;
+            }
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("Team does not exist...");
+            return true;
         }
-    }
-
-    return -1;
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 }
+
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();

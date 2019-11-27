@@ -1,87 +1,123 @@
-/* Each account will be created as an object with attributes of userName and passWord*/
-var users = [];
-//team array to store all teams
-var teams = [];
-var teamIndex,member1,member2, member3
-var member1Index,member2Index,member3Index;
-var user1Bike,user1Swim,user1Run;
-var user2Bike,user2Swim,user2Run;
-var user3Bike,user3Swim,user3Run;
+var userEmail = JSON.parse(localStorage.getItem('email'));
+var userName = JSON.parse(localStorage.getItem('userName'));
+var teamName, teamCount;
+var memTeamName, memberRun, memberBike, memberSwim, memberTotal;
+var teamMember1, mem1Biking, mem1Running, mem1Swimming;
+var teamMember2, mem2Biking, mem2Running, mem2Swimming;
+var teamMember3, mem3Biking, mem3Running, mem3Swimming;
 
-//Need to implement
-//Display all team members and have a remove button
-//ability for leader of team to remove team members ~> maybe added a leader boolean to user object
+const firebaseConfig = {
+    apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
+    authDomain: "test-login-1573079166139.firebaseapp.com",
+    databaseURL: "https://test-login-1573079166139.firebaseio.com",
+    projectId: "test-login-1573079166139",
+    storageBucket: "test-login-1573079166139.appspot.com",
+    messagingSenderId: "1042080648547",
+    appId: "1:1042080648547:web:42a92c14b913d229909756",
+    measurementId: "G-WQ9Z1673RK"
+};
 
-function displayData(){
-    var teamName = window.prompt('What is your teamname?','Enter here');
-    if(teamIndex(teamName) == -1){
-        window.alert("Cannot find team");
-        return;
-    }else{
-        teamIndex = teamIndex(teamName);
-    }
+var project = firebase.initializeApp(firebaseConfig);
+var db = project.firestore();
+var userRef = db.collection("users").doc(userName);
+var teamDocRef = db.collection("teams");
 
-    member1 = teams[teamIndex].mmber1;
-    member2 = teams[teamIndex].mmber2;
-    member3 = teams[teamIndex].mmber3;
-
-    member1Index = userIndex(member1);
-    member2Index = userIndex(member2);
-    member3Index = userIndex(member3);
-
-    user1Swim = users[member1Index].swim;
-    user1Run = users[member1Index].run;
-    user1Bike = users[member1Index].bike;
-
-    user2Swim = users[member2Index].swim;
-    user2Run = users[member2Index].run;
-    user2Bike = users[member2Index].bike;
-
-    user3Swim = users[member3Index].swim;
-    user3Run = users[member3Index].run;
-    user3Bike = users[member3Index].bike;
-
-    var user1SwimData= {"userSwim" : user1Swim}; 
-    var user1RunData= {"userRun" : user1Run};
-    var user1BikeData= {"userBike" : user1Bike};
-
-    var user2SwimData= {"userSwim" : user2Swim}; 
-    var user2RunData= {"userRun" : user2Run};
-    var user2BikeData= {"userBike" : user2Bike};
-
-    var user3SwimData= {"userSwim" : user3Swim}; 
-    var user3RunData= {"userRun" : user3Run};
-    var user3BikeData= {"userBike" : user3Bike};
-
-    w3.displayObject("user1Swim", user1SwimData);
-    w3.displayObject("user1Run", user1RunData);
-    w3.displayObject("user1Bike", user1BikeData);
-
-    w3.displayObject("user2Swim", user2SwimData);
-    w3.displayObject("user2Run", user2RunData);
-    w3.displayObject("user2Bike", user2BikeData);
-
-    w3.displayObject("user3Swim", user3SwimData);
-    w3.displayObject("user3Run", user3RunData);
-    w3.displayObject("user3Bike", user3BikeData);
+function userTeamName(){
+    userRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("User data received");
+            teamName = doc.data().team;
+            teamData(teamName);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 }
 
-function teamIndex(name){
-    for(var x=0;x<teams.length;x++){
-        if(teams[x].id == teamName){
-            return x;
+function teamData(teamName){
+    var teamRef = teamDocRef.doc(teamName);
+    teamRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Team data received");
+            teamMember1 = doc.data().member1;
+            teamMember2 = doc.data().member2;
+            teamMember3 = doc.data().member3;
+            teamCount = doc.data().memberCnt;
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
         }
-    }
-    return -1;
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
 }
 
-function userIndex(user){
-    for(var x=0;x<users.length;x++){
-        if(users[x].username == user){
-            return x;
+function memberData(member){
+    var memRef = db.collection("users").doc(member);
+    memRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("User data received");
+            memTeamName = doc.data().team;
+            if(teamName == memTeamName){
+                memberRun = doc.data().run;
+                memberBike = doc.data().bike;
+                memberSwim = doc.data().swim;
+                memberTotal = doc.data().total;
+            }
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
         }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+function displayTeam(){
+    //get user's team name
+    // userTeamName();
+    //get team members from team name
+    // teamData(teamName);
+
+    //get team member 1 data
+    memberData(teamMember1);
+    mem1Biking = memberBike;
+    mem1Running = memberRun;
+    mem1Swimming = memberSwim;
+    document.getElementById("user1Swim").innerHTML = mem1Swimming + "/2.4";
+    document.getElementById("user1Run").innerHTML = mem1Running + "/26.2";
+    document.getElementById("user1Bike").innerHTML = mem1Biking + "/112";
+
+    //get team member 2 data and display
+    if(teamCount >= 2){
+        memberData(teamMember2);
+        mem2Biking = memberBike;
+        mem2Running = memberRun;
+        mem2Swimming = memberSwim;
+        document.getElementById("user2Swim").innerHTML = mem2Swimming + "/2.4";
+        document.getElementById("user2Run").innerHTML = mem2Running + "/26.2";
+        document.getElementById("user2Bike").innerHTML = mem2Biking + "/112";
     }
-    return -1;
+    else{
+        document.getElementById("nomember2").innerHTML = "No Member 2";
+    }
+
+    //get team member 3 data and display
+    if(teamCount >= 3){
+        memberData(teamMember3);
+        mem3Biking = memberBike;
+        mem3Running = memberRun;
+        mem3Swimming = memberSwim;
+        document.getElementById("user3Swim").innerHTML = mem3Swimming + "/2.4";
+        document.getElementById("user3Run").innerHTML = mem3Running + "/26.2";
+        document.getElementById("user3Bike").innerHTML = mem3Biking + "/112";
+    }   
+    else{
+        document.getElementById("nomember3").innerHTML = "No Member 3";
+    }
 }
 
 function signOut() {
