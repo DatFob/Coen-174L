@@ -1,35 +1,78 @@
-/* Each account will be created as an object with attributes of userName and passWord*/
-var users = [];
-//team array to store all teams
+var userEmail = JSON.parse(localStorage.getItem('email'));
+var userName = JSON.parse(localStorage.getItem('userName'));
 var teams = [];
+var users = [];
+var topTeams = [];
+var topUsers = [];
+var topUsersCnt, topTeamsCnt;
 
-//Need to implement
-//essentially display the info that is in the database
-//display user and a team leaderbard so organize in order of most percentage complete?
+const firebaseConfig = {
+    apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
+    authDomain: "test-login-1573079166139.firebaseapp.com",
+    databaseURL: "https://test-login-1573079166139.firebaseio.com",
+    projectId: "test-login-1573079166139",
+    storageBucket: "test-login-1573079166139.appspot.com",
+    messagingSenderId: "1042080648547",
+    appId: "1:1042080648547:web:42a92c14b913d229909756",
+    measurementId: "G-WQ9Z1673RK"
+};
 
-function sortTeams() {
-    teams.sort(function(a,b){return b.total - a.total});
-    displayTeamLeaderboard
+var project = firebase.initializeApp(firebaseConfig);
+var db = project.firestore();
+var userDocRef = db.collection("users");
+var teamDocRef = db.collection("teams");
+
+function displayUsers(){
+    console.log("users:");
+    console.log(users);
+    users.forEach(displayEachUser);
 }
 
-function sortUsers() {
-    users.sort(function(a, b){return b.total - a.total});
-    displayUserLeaderboard();
+function displayTeams(){
+    console.log("teams:");
+    console.log(teams);
+    teams.forEach(displayEachTeam);
 }
 
-function displayUserLeaderboard() {
-    //substitute XXXX with paragraph id in HTML
-    document.getElementById("XXXX").innerHTML =
-    users[0].username + " " + users[0].total + "miles" + "<br>" +
-    users[1].username + " " + users[1].total + "miles" + "<br>" +
-    users[2].username + " " + users[2].total + "miles";
+function displayEachTeam(item, index) {
+    document.getElementById("teamLeaders").innerHTML += teams[index].name + " " + teams[index].total + " miles" + "<br>"; 
 }
 
-function displayTeamLeaderboard() {
-    document.getElementsByTagName("XXXX").innerHTML = 
-    teams[0].id + " " + teams[0].total + "miles" + "<br>" +
-    teams[1].id + " " + teams[1].total + "miles" + "<br>" +
-    teams[2].id + " " + teams[2].total + "miles";
+function displayEachUser(item, index) {
+    document.getElementById("individualLeaders").innerHTML += users[index].name + " " + users[index].total + " miles" + "<br>"; 
+}
+
+function data(){
+    userData();
+    teamData();
+    console.log("Team and user data retrieved");
+}
+
+function userData(){
+    userDocRef.orderBy('total').get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+            users.push({name:doc.id, total:doc.data().total});
+        });
+    });
+}
+
+function teamData(){
+    teamDocRef.orderBy('total').get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+            teams.push({name:doc.id, total:doc.data().total});
+        });
+    });
+}
+
+function displayLeaderboards(){
+    document.getElementById("individualLeaders").innerHTML = "";
+    document.getElementById("teamLeaders").innerHTML = "";
+    teams.reverse();
+    users.reverse();
+    displayUsers();
+    displayTeams();
 }
 
 function signOut() {
