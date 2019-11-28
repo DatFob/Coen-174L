@@ -91,38 +91,35 @@ function teamToUser(teamName){
 }
 
 function createTeam(){
-    if(checkTeam() == true){
-        return;
+    if(checkTeam() != true){
+        newTeamName = document.getElementById('newTeamName').value;
+        console.log('Create team function evoked');
+        teamDocRef.doc(newTeamName).set({
+            name: newTeamName,
+            member1: userName,
+            member2: '',
+            member3: '',    
+            swim: userSwimming,
+            run: userRunning,
+            bike: userBiking,
+            total: userTotal,
+            memberCnt: 1
+        }).then(function(){
+            console.log('success'); 
+        }).catch(function(error){
+            console.log('error occured');
+        });
+        teamToUser(newTeamName);
     }
-    newTeamName = document.getElementById('newTeamName').value;
-    console.log('Create team function evoked');
-    teamDocRef.doc(newTeamName).set({
-        name: newTeamName,
-        member1: userName,
-        member2: '',
-        member3: '',    
-        swim: userSwimming,
-        run: userRunning,
-        bike: userBiking,
-        total: userTotal,
-        memberCnt: 1
-    }).then(function(){
-        console.log('success'); 
-    }).catch(function(error){
-        console.log('error occured');
-    });
-    teamToUser(newTeamName);
 }
 
 function joinTeam(){
-    if(checkTeam() == true){
-        return;
+    if(checkTeam() != true){
+        joinTeamName = getElementById('teamName').value;
+        if(isTeamFull(joinTeamName) != true){
+            setJoinMember();
+        }
     }
-    joinTeamName = getElementById('teamName').value;
-    if(isTeamFull(joinTeamName) == true){
-        return;
-    }
-    setJoinMember();
 }
 
 function setJoinMember(){
