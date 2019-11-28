@@ -8,16 +8,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="ironbroncostyle.css">
-	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="/__/firebase/7.3.0/firebase-app.js"></script>
 	<script src="/__/firebase/7.3.0/firebase-analytics.js"></script>
 	<script src="/__/firebase/init.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="ironbroncoteam.js"></script>
 </head>
 <body onload="userTeamName()">
@@ -57,6 +53,7 @@
 		<h1 style="padding-bottom: 3rem;">Team Members</h1>
 		<div id="member1" class="container" style="float: left; width: 33%; padding-right: 1.5rem; padding-left: 1.5rem; padding-bottom: 3rem;">
 			<h2>Member 1</h2>
+			<p id="user1Name" style="padding-top: 2rem;"></p>
     		<p id="user1Swim" style="padding-top: 2rem;"></p>
     		<p id="user1Run"></p>
     		<p id="user1Bike"></p>
@@ -66,6 +63,7 @@
 		</div>
 		<div id="member2" class="container" style="float: left; width: 33%; padding-right: 1.5rem; padding-left: 1.5rem; padding-bottom: 3rem;">
 			<h2>Member 2</h2>
+			<p id="user2Name" style="padding-top: 2rem;"></p>
     		<p id="user2Swim" style="padding-top: 2rem;"></p>
     		<p id="user2Run"></p>
     		<p id="user2Bike"></p>
@@ -76,6 +74,7 @@
 		</div>
 		<div id="member3" class="container" style="float: left; width: 33%; padding-right: 1.5rem; padding-left: 1.5rem; padding-bottom: 3rem;">
 			<h2>Member 3</h2>
+			<p id="user3Name" style="padding-top: 2rem;"></p>
     		<p id="user3Swim" style="padding-top: 2rem;"></p>
     		<p id="user3Run"></p>
     		<p id="user3Bike"></p>
@@ -84,9 +83,13 @@
 	  			<button class="btn btn-lg btn-primary btn-block" type="submit">Remove</button>
 	  		</div>
 		</div>
+		<div class="infobBox" align="center" style="padding-top: 3rem;">
+			<button id="myBtn" onclick="displayTeam();" type="button" class="btn btn-primary">Show Team</button>
+		</div>
 	</div>
-	<div class="infobBox" align="center" style="padding-top: 3rem;">
-		<button id="myBtn" onclick="displayTeam();" type="button" class="btn btn-primary">Show Team</button>
-	</div>
+	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
