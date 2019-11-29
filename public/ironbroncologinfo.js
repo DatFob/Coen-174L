@@ -4,7 +4,6 @@ var userName = JSON.parse(localStorage.getItem('userName'));
 var userBiking, userRunning, userSwimming;
 var teamName, teamBiking, teamRunning, teamSwimming;
 var biking, running, swimming;
-var teamMember1, teamMember2, teamMember3;
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -30,7 +29,9 @@ function userData(){
             userBiking = doc.data().bike;
             userSwimming = doc.data().swim;
             teamName = doc.data().team;
-            teamData(teamName);
+            if (teamName != '' && teamName != null) {
+                teamData(teamName);
+            }
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -48,9 +49,6 @@ function teamData(teamName){
             teamRunning = doc.data().run;
             teamBiking = doc.data().bike;
             teamSwimming = doc.data().swim;
-            teamMember1 = doc.data().member1;
-            teamMember2 = doc.data().member2;
-            teamMember3 = doc.data().member3;
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -66,10 +64,7 @@ function updateUserMileageInfo(userName){
     tempRun = running + userRunning;
     tempSwim = swimming + userSwimming;
     tempTotal = tempBike + tempRun + tempSwim;
-    db.collection("users").doc(userName).set({
-        name: userName,
-        email: userEmail,
-        team: teamName,
+    db.collection("users").doc(userName).update({
         swim: tempSwim,
         run: tempRun,
         bike: tempBike,
@@ -87,11 +82,7 @@ function updateTeamMileageInfo(teamName){
     tempRun = running + teamRunning;
     tempSwim = swimming + teamSwimming;
     tempTotal = tempBike + tempRun + tempSwim;
-    db.collection("teams").doc(teamName).set({
-        member1: teamMember1,
-        member2: teamMember2,
-        member3: teamMember3,
-        name: teamName,
+    teamDocRef.doc(teamName).update({
         swim: tempSwim,
         run: tempRun,
         bike: tempBike,
@@ -108,7 +99,9 @@ function updateMileage(){
     running = parseInt(document.getElementById('running').value);
     swimming = parseInt(document.getElementById('swim').value);
     updateUserMileageInfo(userName);
-    updateTeamMileageInfo(teamName);
+    if (teamName != '' && teamName != null) {
+        updateTeamMileageInfo(teamName);
+    }
     // var notify = $.notify({
     //     title: userName,
     //     message: "Your progress has been updated"
