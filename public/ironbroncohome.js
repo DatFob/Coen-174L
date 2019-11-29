@@ -81,7 +81,7 @@ function displayProgress()
 }
 
 function leaveTeam() {
-    if (teamName != null || teamName != '')
+    if (teamName != null && teamName != '')
     {
         userRef.update({
             team: ''
@@ -141,6 +141,9 @@ function leaveTeam() {
                 console.log('error occured');
             });
         }
+    }
+    else{
+        alert("Unable to leave a team since you are not a member of one.");
     }
 }
 

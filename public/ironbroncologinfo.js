@@ -111,6 +111,73 @@ function updateMileage(){
     // return notify;
 }
 
+function leaveTeam() {
+    if (teamName != null && teamName != '')
+    {
+        userRef.update({
+            team: ''
+        }).then(function(){
+            alert("You have left the team " + teamName + ".");
+            console.log('success'); 
+        }).catch(function(error){
+            console.log('error occured');
+        });
+        if(teamCount == 1)
+        {
+            teamDocRef.doc(teamName).delete().then(function() {
+                console.log("Team successfully deleted!");
+            }).catch(function(error) {
+                console.error("Error removing team: ", error);
+            });
+        }
+        if(member1 == userName){
+            teamDocRef.doc(teamName).update({
+                member1: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        else if(member2 == userName){
+            teamDocRef.doc(teamName).update({
+                member2: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        else if(member3 == userName){
+            teamDocRef.doc(teamName).update({
+                member3: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+    }
+    else{
+        alert("Unable to leave a team since you are not a member of one.");
+    }
+}
+
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {

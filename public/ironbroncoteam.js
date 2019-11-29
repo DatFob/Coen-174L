@@ -27,7 +27,9 @@ function userTeamName(){
         if (doc.exists) {
             console.log("User data received");
             teamName = doc.data().team;
-            teamData(teamName);
+            if(teamName != '' && teamName != null){
+                teamData(teamName);
+            }
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -78,52 +80,119 @@ function memberData(member){
 }
 
 function displayTeam(){
-    //get user's team name
-    // userTeamName();
-    //get team members from team name
-    // teamData(teamName);
+    if(teamName != '' && teamName != null){
+        //get team member 1 data
+        memberData(teamMember1);
+        mem1Name = memberName;
+        mem1Biking = memberBike;
+        mem1Running = memberRun;
+        mem1Swimming = memberSwim;
+        document.getElementById("user1Name").innerHTML = mem1Name;
+        document.getElementById("user1Swim").innerHTML = mem1Swimming + "/2.4";
+        document.getElementById("user1Run").innerHTML = mem1Running + "/26.2";
+        document.getElementById("user1Bike").innerHTML = mem1Biking + "/112";
 
-    //get team member 1 data
-    memberData(teamMember1);
-    mem1Name = memberName;
-    mem1Biking = memberBike;
-    mem1Running = memberRun;
-    mem1Swimming = memberSwim;
-    document.getElementById("user1Name").innerHTML = mem1Name;
-    document.getElementById("user1Swim").innerHTML = mem1Swimming + "/2.4";
-    document.getElementById("user1Run").innerHTML = mem1Running + "/26.2";
-    document.getElementById("user1Bike").innerHTML = mem1Biking + "/112";
+        //get team member 2 data and display
+        if(teamCount >= 2){
+            memberData(teamMember2);
+            mem2Name = memberName;
+            mem2Biking = memberBike;
+            mem2Running = memberRun;
+            mem2Swimming = memberSwim;
+            document.getElementById("user2Name").innerHTML = mem2Name;
+            document.getElementById("user2Swim").innerHTML = mem2Swimming + "/2.4";
+            document.getElementById("user2Run").innerHTML = mem2Running + "/26.2";
+            document.getElementById("user2Bike").innerHTML = mem2Biking + "/112";
+        }
+        else{
+            document.getElementById("user2Name").innerHTML = "No Member 2";
+        }
 
-    //get team member 2 data and display
-    if(teamCount >= 2){
-        memberData(teamMember2);
-        mem2Name = memberName;
-        mem2Biking = memberBike;
-        mem2Running = memberRun;
-        mem2Swimming = memberSwim;
-        document.getElementById("user2Name").innerHTML = mem2Name;
-        document.getElementById("user2Swim").innerHTML = mem2Swimming + "/2.4";
-        document.getElementById("user2Run").innerHTML = mem2Running + "/26.2";
-        document.getElementById("user2Bike").innerHTML = mem2Biking + "/112";
+        //get team member 3 data and display
+        if(teamCount >= 3){
+            memberData(teamMember3);
+            mem3Name = memberName;
+            mem3Biking = memberBike;
+            mem3Running = memberRun;
+            mem3Swimming = memberSwim;
+            document.getElementById("user3Name").innerHTML = mem3Name;
+            document.getElementById("user3Swim").innerHTML = mem3Swimming + "/2.4";
+            document.getElementById("user3Run").innerHTML = mem3Running + "/26.2";
+            document.getElementById("user3Bike").innerHTML = mem3Biking + "/112";
+        }   
+        else{
+            document.getElementById("user3Name").innerHTML = "No Member 3";
+        }
+    }
+    else {
+        document.getElementById("user2Name").innerHTML = "You are not a member of a team. Click 'Join/Create a Team' to join one.";
+    }
+}
+
+function leaveTeam() {
+    if (teamName != null && teamName != '')
+    {
+        userRef.update({
+            team: ''
+        }).then(function(){
+            alert("You have left the team " + teamName + ".");
+            console.log('success'); 
+        }).catch(function(error){
+            console.log('error occured');
+        });
+        if(teamCount == 1)
+        {
+            teamDocRef.doc(teamName).delete().then(function() {
+                console.log("Team successfully deleted!");
+            }).catch(function(error) {
+                console.error("Error removing team: ", error);
+            });
+        }
+        if(member1 == userName){
+            teamDocRef.doc(teamName).update({
+                member1: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        else if(member2 == userName){
+            teamDocRef.doc(teamName).update({
+                member2: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        else if(member3 == userName){
+            teamDocRef.doc(teamName).update({
+                member3: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
     }
     else{
-        //document.getElementById("nomember2").innerHTML = "No Member 2";
-    }
-
-    //get team member 3 data and display
-    if(teamCount >= 3){
-        memberData(teamMember3);
-        mem3Name = memberName;
-        mem3Biking = memberBike;
-        mem3Running = memberRun;
-        mem3Swimming = memberSwim;
-        document.getElementById("user3Name").innerHTML = mem3Name;
-        document.getElementById("user3Swim").innerHTML = mem3Swimming + "/2.4";
-        document.getElementById("user3Run").innerHTML = mem3Running + "/26.2";
-        document.getElementById("user3Bike").innerHTML = mem3Biking + "/112";
-    }   
-    else{
-        //document.getElementById("nomember3").innerHTML = "No Member 3";
+        alert("Unable to leave a team since you are not a member of one.");
     }
 }
 
