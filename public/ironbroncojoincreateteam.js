@@ -115,9 +115,16 @@ function createTeam(){
 
 function joinTeam(){
     if(checkTeam() != true){
-        joinTeamName = getElementById('teamName').value;
+        joinTeamName = document.getElementById('teamName').value;
         if(isTeamFull(joinTeamName) != true){
             setJoinMember();
+            userRef.update({
+                team: joinTeamName
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
         }
     }
 }

@@ -91,6 +91,14 @@ function leaveTeam() {
         }).catch(function(error){
             console.log('error occured');
         });
+        if(teamCount == 1)
+        {
+            teamDocRef.doc(teamName).delete().then(function() {
+                console.log("Team successfully deleted!");
+            }).catch(function(error) {
+                console.error("Error removing team: ", error);
+            });
+        }
         if(member1 == userName){
             teamDocRef.doc(teamName).update({
                 member1: '',  
