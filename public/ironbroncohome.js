@@ -1,7 +1,8 @@
 var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var userBiking, userRunning, userSwimming, userTotal;
-var teamName, teamBiking, teamRunning, teamSwimming, teamTotal;
+var teamName, teamBiking, teamRunning, teamSwimming, teamTotal, teamCount;
+var member1, member2, member3;
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -29,7 +30,9 @@ function userData(){
             userSwimming = doc.data().swim;
             userTotal = doc.data().total;
             teamName = doc.data().team;
-            teamData(teamName);
+            if (teamName != '' && teamName != null) {
+                teamData(teamName);
+            }
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -45,10 +48,14 @@ function teamData(teamName){
     teamRef.get().then(function(doc) {
         if (doc.exists) {
             console.log("Team data received");
+            member1 = doc.data().member1;
+            member2 = doc.data().member2;
+            member3 = doc.data().member3;
             teamRunning = doc.data().run;
             teamBiking = doc.data().bike;
             teamSwimming = doc.data().swim;
             teamTotal = doc.data().total;
+            teamCount = doc.data().memberCnt;
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -63,10 +70,70 @@ function displayProgress()
     document.getElementById("userSwim").innerHTML = userSwimming + "/2.4";
     document.getElementById("userRun").innerHTML = userRunning + "/26.2";
     document.getElementById("userBike").innerHTML = userBiking + "/112";
+    if (teamName != '' && teamName != null) {
+        document.getElementById("teamSwim").innerHTML = teamSwimming + "/2.4";
+        document.getElementById("teamRun").innerHTML = teamRunning + "/26.2";
+        document.getElementById("teamBike").innerHTML = teamBiking + "/112";
+    }
+    else {
+        document.getElementById("teamSwim").innerHTML = "You are not a member of a team. Click 'Join/Create a Team' to join one.";
+    }
+}
 
-    document.getElementById("teamSwim").innerHTML = teamSwimming + "/2.4";
-    document.getElementById("teamRun").innerHTML = teamRunning + "/26.2";
-    document.getElementById("teamBike").innerHTML = teamBiking + "/112";
+function leaveTeam() {
+    if (teamName != null || teamName != '')
+    {
+        userRef.update({
+            team: ''
+        }).then(function(){
+            alert("You have left the team " + teamName + ".");
+            console.log('success'); 
+        }).catch(function(error){
+            console.log('error occured');
+        });
+        if(member1 == userName){
+            teamDocRef.doc(teamName).update({
+                member1: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        else if(member2 == userName){
+            teamDocRef.doc(teamName).update({
+                member2: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        else if(member3 == userName){
+            teamDocRef.doc(teamName).update({
+                member3: '',  
+                swim: teamSwimming - userSwimming,
+                run: teamRunning - userRunning,
+                bike: teamBiking - userBiking,
+                total: teamTotal - userTotal,
+                memberCnt: teamCount - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+    }
 }
 
 function signOut() {
