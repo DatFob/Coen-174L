@@ -2,9 +2,9 @@ var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var teamName, teamCount, teamSwimming, teamRunning, teamBiking, teamTotal;
 var memTeamName, memberName, memberRun, memberBike, memberSwim, memberTotal;
-var teamMember1, mem1Name, mem1Biking, mem1Running, mem1Swimming;
-var teamMember2, mem2Name, mem2Biking, mem2Running, mem2Swimming;
-var teamMember3, mem3Name, mem3Biking, mem3Running, mem3Swimming;
+var teamMember1, member1Total;
+var teamMember2, member2Total;
+var teamMember3, member3Total;
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -123,18 +123,14 @@ function displayMember1(){
                 document.getElementById("user1Run").innerHTML = doc.data().run + "/26.2";
                 document.getElementById("user1Bike").innerHTML = doc.data().bike + "/112";
                 document.getElementById("user1Swim").innerHTML = doc.data().swim + "/2.4";
+                member1Total = doc.data().total;
             }
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
-    // document.getElementById("user1Name").innerHTML = memberName;
-    // document.getElementById("user1Swim").innerHTML = memberSwim + "/2.4";
-    // document.getElementById("user1Run").innerHTML = memberRun + "/26.2";
-    // document.getElementById("user1Bike").innerHTML = memberBike + "/112";
 }
 
 function displayMember2(){
@@ -147,18 +143,14 @@ function displayMember2(){
                 document.getElementById("user2Run").innerHTML = doc.data().run + "/26.2";
                 document.getElementById("user2Bike").innerHTML = doc.data().bike + "/112";
                 document.getElementById("user2Swim").innerHTML = doc.data().swim + "/2.4";
+                member2Total = doc.data().total;
             }
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
-    // document.getElementById("user2Name").innerHTML = memberName;
-    // document.getElementById("user2Swim").innerHTML = memberSwim + "/2.4";
-    // document.getElementById("user2Run").innerHTML = memberRun + "/26.2";
-    // document.getElementById("user2Bike").innerHTML = memberBike + "/112";
 }
 
 function displayMember3(){
@@ -171,18 +163,14 @@ function displayMember3(){
                 document.getElementById("user3Run").innerHTML = doc.data().run + "/26.2";
                 document.getElementById("user3Bike").innerHTML = doc.data().bike + "/112";
                 document.getElementById("user3Swim").innerHTML = doc.data().swim + "/2.4";
+                member3Total = doc.data().total;
             }
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
-    // document.getElementById("user3Name").innerHTML = memberName;
-    // document.getElementById("user3Swim").innerHTML = memberSwim + "/2.4";
-    // document.getElementById("user3Run").innerHTML = memberRun + "/26.2";
-    // document.getElementById("user3Bike").innerHTML = memberBike + "/112";
 }
 
 function leaveTeam() {
@@ -274,10 +262,12 @@ function remove1() {
         }).catch(function(error){
             console.log('error occured');
         });
+        alert("Removed " + teamMember1 + " from the team.");
     }
     else {
         alert("Unable to remove team member 1.");
     }
+    displayTeam();
 }
 
 function remove2() {
@@ -303,10 +293,12 @@ function remove2() {
             console.log('error occured');
         });
         displayTeam();
+        alert("Removed " + teamMember2 + " from the team.");
     }
     else {
         alert("Unable to remove team member 2.");
     }
+    displayTeam();
 }
 
 function remove3() {
@@ -331,10 +323,12 @@ function remove3() {
         }).catch(function(error){
             console.log('error occured');
         });
+        alert("Removed " + teamMember3 + " from the team.");
     }
     else {
         alert("Unable to remove team member 3.");
     }
+    displayTeam();
 }
 
 function signOut() {
