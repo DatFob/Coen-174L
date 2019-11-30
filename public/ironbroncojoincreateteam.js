@@ -4,6 +4,7 @@ var newTeamName, joinTeamName, memberCount;
 var userBiking, userSwimming, userRunning, userTotal;
 var teamBiking, teamSwimming, teamRunning, teamTotal;
 var teamCount, teamName;
+var member1, member2, member3;
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -31,6 +32,10 @@ function userData(){
             userSwimming = doc.data().swim;
             userTotal = doc.data().total;
             teamName = doc.data().team;
+            if (teamName != null && teamName != '')
+            {
+                teamData(teamName);
+            }
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -49,6 +54,9 @@ function teamData(team){
             teamBiking = doc.data().bike;
             teamSwimming = doc.data().swim;
             teamTotal = doc.data().total;
+            member1 = doc.data().member1;
+            member2 = doc.data().member2;
+            member3 = doc.data().member3;
             teamCount = doc.data().memberCnt;
         } else {
             // doc.data() will be undefined in this case
@@ -188,58 +196,60 @@ function isTeamFull(team){
 }
 
 function leaveTeam() {
-    userData();
     if (teamName != null && teamName != '')
     {
-        if(teamCount == 1)
+        if(teamCount <= 1)
         {
+            console.log("teamcount 1");
             teamDocRef.doc(teamName).delete().then(function() {
                 console.log("Team successfully deleted!");
             }).catch(function(error) {
                 console.error("Error removing team: ", error);
             });
         }
-        if(member1 == userName){
-            teamDocRef.doc(teamName).update({
-                member1: '',  
-                swim: teamSwimming - userSwimming,
-                run: teamRunning - userRunning,
-                bike: teamBiking - userBiking,
-                total: teamTotal - userTotal,
-                memberCnt: teamCount - 1
-            }).then(function(){
-                console.log('success'); 
-            }).catch(function(error){
-                console.log('error occured');
-            });
-        }
-        else if(member2 == userName){
-            teamDocRef.doc(teamName).update({
-                member2: '',  
-                swim: teamSwimming - userSwimming,
-                run: teamRunning - userRunning,
-                bike: teamBiking - userBiking,
-                total: teamTotal - userTotal,
-                memberCnt: teamCount - 1
-            }).then(function(){
-                console.log('success'); 
-            }).catch(function(error){
-                console.log('error occured');
-            });
-        }
-        else if(member3 == userName){
-            teamDocRef.doc(teamName).update({
-                member3: '',  
-                swim: teamSwimming - userSwimming,
-                run: teamRunning - userRunning,
-                bike: teamBiking - userBiking,
-                total: teamTotal - userTotal,
-                memberCnt: teamCount - 1
-            }).then(function(){
-                console.log('success'); 
-            }).catch(function(error){
-                console.log('error occured');
-            });
+        else {
+            if(member1 == userName){
+                teamDocRef.doc(teamName).update({
+                    member1: '',  
+                    swim: teamSwimming - userSwimming,
+                    run: teamRunning - userRunning,
+                    bike: teamBiking - userBiking,
+                    total: teamTotal - userTotal,
+                    memberCnt: teamCount - 1
+                }).then(function(){
+                    console.log('success'); 
+                }).catch(function(error){
+                    console.log('error occured');
+                });
+            }
+            else if(member2 == userName){
+                teamDocRef.doc(teamName).update({
+                    member2: '',  
+                    swim: teamSwimming - userSwimming,
+                    run: teamRunning - userRunning,
+                    bike: teamBiking - userBiking,
+                    total: teamTotal - userTotal,
+                    memberCnt: teamCount - 1
+                }).then(function(){
+                    console.log('success'); 
+                }).catch(function(error){
+                    console.log('error occured');
+                });
+            }
+            else if(member3 == userName){
+                teamDocRef.doc(teamName).update({
+                    member3: '',  
+                    swim: teamSwimming - userSwimming,
+                    run: teamRunning - userRunning,
+                    bike: teamBiking - userBiking,
+                    total: teamTotal - userTotal,
+                    memberCnt: teamCount - 1
+                }).then(function(){
+                    console.log('success'); 
+                }).catch(function(error){
+                    console.log('error occured');
+                });
+            }
         }
         userRef.update({
             team: ''
@@ -250,7 +260,7 @@ function leaveTeam() {
             console.log('error occured');
         });
     }
-    else{
+    else {
         alert("Unable to leave a team since you are not a member of one.");
     }
 }
