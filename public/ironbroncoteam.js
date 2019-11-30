@@ -2,9 +2,9 @@ var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var teamName, teamCount, teamSwimming, teamRunning, teamBiking, teamTotal;
 var memTeamName, memberName, memberRun, memberBike, memberSwim, memberTotal;
-var teamMember1, member1Total;
-var teamMember2, member2Total;
-var teamMember3, member3Total;
+var teamMember1, member1Swim, member1Run, member1Bike, member1Total;
+var teamMember2, member2Swim, member2Run, member2Bike, member2Total;
+var teamMember3, member3Swim, member3Run, member3Bike, member3Total;
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -69,22 +69,14 @@ function memberData(member){
         if (doc.exists) {
             console.log("Member data received");
             memTeamName = doc.data().team;
-            console.log(memTeamName);
-            console.log(teamName);
             if(teamName == memTeamName){
                 memberName = doc.data().name;
-                console.log(memberName);
                 memberRun = doc.data().run;
-                console.log(memberRun);
                 memberBike = doc.data().bike;
-                console.log(memberBike);
                 memberSwim = doc.data().swim;
-                console.log(memberSwim);
                 memberTotal = doc.data().total;
-                console.log(memberTotal);
             }
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
@@ -123,6 +115,9 @@ function displayMember1(){
                 document.getElementById("user1Run").innerHTML = doc.data().run + "/26.2";
                 document.getElementById("user1Bike").innerHTML = doc.data().bike + "/112";
                 document.getElementById("user1Swim").innerHTML = doc.data().swim + "/2.4";
+                member1Swim = doc.data().swim;
+                member1Run = doc.data().run;
+                member1Bike = doc.data().bike;
                 member1Total = doc.data().total;
             }
         } else {
@@ -143,6 +138,9 @@ function displayMember2(){
                 document.getElementById("user2Run").innerHTML = doc.data().run + "/26.2";
                 document.getElementById("user2Bike").innerHTML = doc.data().bike + "/112";
                 document.getElementById("user2Swim").innerHTML = doc.data().swim + "/2.4";
+                member2Swim = doc.data().swim;
+                member2Run = doc.data().run;
+                member2Bike = doc.data().bike;
                 member2Total = doc.data().total;
             }
         } else {
@@ -163,6 +161,9 @@ function displayMember3(){
                 document.getElementById("user3Run").innerHTML = doc.data().run + "/26.2";
                 document.getElementById("user3Bike").innerHTML = doc.data().bike + "/112";
                 document.getElementById("user3Swim").innerHTML = doc.data().swim + "/2.4";
+                member3Swim = doc.data().swim;
+                member3Run = doc.data().run;
+                member3Bike = doc.data().bike;
                 member3Total = doc.data().total;
             }
         } else {
@@ -245,10 +246,10 @@ function remove1() {
         memberData(teamMember1);
         teamDocRef.doc(teamName).update({
             member1: '',  
-            swim: teamSwimming - memberSwim,
-            run: teamRunning - memberRun,
-            bike: teamBiking - memberBike,
-            total: teamTotal - memberTotal,
+            swim: teamSwimming - member1Swim,
+            run: teamRunning - member1Run,
+            bike: teamBiking - member1Bike,
+            total: teamTotal - member1Total,
             memberCnt: teamCount - 1
         }).then(function(){
             console.log('success'); 
@@ -275,10 +276,10 @@ function remove2() {
         memberData(teamMember2);
         teamDocRef.doc(teamName).update({
             member2: '',  
-            swim: teamSwimming - memberSwim,
-            run: teamRunning - memberRun,
-            bike: teamBiking - memberBike,
-            total: teamTotal - memberTotal,
+            swim: teamSwimming - member2Swim,
+            run: teamRunning - member2Run,
+            bike: teamBiking - member2Bike,
+            total: teamTotal - member2Total,
             memberCnt: teamCount - 1
         }).then(function(){
             console.log('success'); 
@@ -305,11 +306,11 @@ function remove3() {
     if (teamMember1) {
         memberData(teamMember3);
         teamDocRef.doc(teamName).update({
-            member3: '',  
-            swim: teamSwimming - memberSwim,
-            run: teamRunning - memberRun,
-            bike: teamBiking - memberBike,
-            total: teamTotal - memberTotal,
+            member3: '',
+            swim: teamSwimming - member3Swim,
+            run: teamRunning - member3Run,
+            bike: teamBiking - member3Bike,
+            total: teamTotal - member3Total,
             memberCnt: teamCount - 1
         }).then(function(){
             console.log('success'); 

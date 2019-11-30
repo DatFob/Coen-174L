@@ -97,6 +97,11 @@ function createTeam(){
     if(checkTeam() != true){
         newTeamName = document.getElementById('newTeamName').value;
         console.log('Create team function evoked');
+        if (newTeamName == null || newTeamName == '')
+        {
+            alert("Invalid. No team name entered in field.");
+            return;
+        }
         teamDocRef.doc(newTeamName).set({
             name: newTeamName,
             member1: userName,
@@ -113,6 +118,7 @@ function createTeam(){
             console.log('error occured');
         });
         teamToUser(newTeamName);
+        alert("You have created the team " + newTeamName + ".");
     }
 }
 
@@ -122,6 +128,7 @@ function joinTeam(){
         if(isTeamFull(joinTeamName) != true){
             setJoinMember();
         }
+        alert("You have joined the team " + joinTeamName + ".");
     }
 }
 
