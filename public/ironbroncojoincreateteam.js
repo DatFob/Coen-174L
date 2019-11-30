@@ -121,13 +121,13 @@ function joinTeam(){
         joinTeamName = document.getElementById('teamName').value;
         if(isTeamFull(joinTeamName) != true){
             setJoinMember();
-            userRef.update({
-                team: joinTeamName
-            }).then(function(){
-                console.log('success'); 
-            }).catch(function(error){
-                console.log('error occured');
-            });
+            // userRef.update({
+            //     team: joinTeamName
+            // }).then(function(){
+            //     console.log('success'); 
+            // }).catch(function(error){
+            //     console.log('error occured');
+            // });
         }
     }
 }
@@ -135,7 +135,7 @@ function joinTeam(){
 function setJoinMember(){
     teamData(joinTeamName);
     if(memberCount == 1){
-        return teamDocRef.doc(joinTeamName).update({
+        teamDocRef.doc(joinTeamName).update({
             member2: userName,
             memberCnt: 2,
             swim: teamSwimming + userSwimming,
@@ -151,8 +151,10 @@ function setJoinMember(){
             // The document probably doesn't exist.
             console.error("Error adding second member: ", error);
         });
-    }else if(memberCount == 2){
-        return teamDocRef.doc(joinTeamName).update({
+        teamToUser(joinTeamName);
+    }
+    else if(memberCount == 2){
+        teamDocRef.doc(joinTeamName).update({
             member3: userName,
             memberCnt: 3,
             swim: teamSwimming + userSwimming,
@@ -168,8 +170,11 @@ function setJoinMember(){
             // The document probably doesn't exist.
             console.error("Error adding last member: ", error);
         });
+        teamToUser(joinTeamName);
     }
-    teamToUser(joinTeamName);
+    else {
+        console.log("Team is full. Unable to join " + joinTeamName +".");
+    }
 }
 
 //return true if team is full else return false
@@ -177,15 +182,16 @@ function isTeamFull(teamName){
     teamDocRef.doc(teamName).get().then(function(doc) {
         if (doc.exists) {
             if(doc.memberCnt == 3){
-                alert(teamName + " already has 3 memebers and is full.");
+                alert(teamName + " already has 3 members and is full.");
                 console.log("team has 3 members...");
                 return true;
             }
-            else{
+            else {
                 memberCount = doc.memberCnt;
                 return false;
             }
-        } else {
+        }
+        else {
             // doc.data() will be undefined in this case
             alert(teamName +" does not exist.");
             console.log("Team does not exist...");
