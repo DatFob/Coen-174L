@@ -40,8 +40,8 @@ function userData(){
     });
 }
 
-function teamData(teamName){
-    var teamRef = teamDocRef.doc(teamName);
+function teamData(team){
+    var teamRef = teamDocRef.doc(team);
     teamRef.get().then(function(doc) {
         if (doc.exists) {
             console.log("Team data received");
@@ -61,28 +61,20 @@ function teamData(teamName){
 
 function checkTeam(){
     console.log("Check Team Function Evoked...");
-    userRef.get().then(function(doc) {
-        if (doc.exists) {
-            if(doc.data().team == '' || doc.data().team == null){
-                console.log("User does not have a team...");
-                return false;
-            }
-            else{
-                alert("You are already a member of a team.");
-                console.log("User has a team...");
-                return true;
-            }
-        } else {
-            console.log("No such user...");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
+    if(teamName != '' && teamName != null){
+        alert("You are already a member of a team.");
+        console.log("User has a team...");
+        return true;
+    }
+    else {
+        console.log("User does not have a team...");
+        return false;
+    }
 }
 
-function teamToUser(teamName){
-    return userRef.update({
-        team: teamName 
+function teamToUser(team){
+    userRef.update({
+        team: team 
     })
     .then(function() {
         console.log("Team name successfully updated!");
@@ -121,13 +113,6 @@ function joinTeam(){
         joinTeamName = document.getElementById('teamName').value;
         if(isTeamFull(joinTeamName) != true){
             setJoinMember();
-            // userRef.update({
-            //     team: joinTeamName
-            // }).then(function(){
-            //     console.log('success'); 
-            // }).catch(function(error){
-            //     console.log('error occured');
-            // });
         }
     }
 }
@@ -178,22 +163,22 @@ function setJoinMember(){
 }
 
 //return true if team is full else return false
-function isTeamFull(teamName){
-    teamDocRef.doc(teamName).get().then(function(doc) {
+function isTeamFull(team){
+    teamDocRef.doc(team).get().then(function(doc) {
         if (doc.exists) {
             if(doc.memberCnt == 3){
-                alert(teamName + " already has 3 members and is full.");
+                alert(team + " already has 3 members and is full.");
                 console.log("team has 3 members...");
                 return true;
             }
             else {
-                memberCount = doc.memberCnt;
+                memberCount = doc.data().memberCnt;
                 return false;
             }
         }
         else {
             // doc.data() will be undefined in this case
-            alert(teamName +" does not exist.");
+            alert(team +" does not exist.");
             console.log("Team does not exist...");
             return true;
         }
@@ -203,16 +188,9 @@ function isTeamFull(teamName){
 }
 
 function leaveTeam() {
+    userData();
     if (teamName != null && teamName != '')
     {
-        userRef.update({
-            team: ''
-        }).then(function(){
-            alert("You have left the team " + teamName + ".");
-            console.log('success'); 
-        }).catch(function(error){
-            console.log('error occured');
-        });
         if(teamCount == 1)
         {
             teamDocRef.doc(teamName).delete().then(function() {
@@ -263,6 +241,14 @@ function leaveTeam() {
                 console.log('error occured');
             });
         }
+        userRef.update({
+            team: ''
+        }).then(function(){
+            alert("You have left the team " + teamName + ".");
+            console.log('success'); 
+        }).catch(function(error){
+            console.log('error occured');
+        });
     }
     else{
         alert("Unable to leave a team since you are not a member of one.");
