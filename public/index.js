@@ -81,15 +81,18 @@ function onSignIn(googleUser) {
   // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);
+  if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin')
+  {
+     return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
+  }
   return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
 }
 
 function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
-      
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
 }
 
 function verifyIdToken(id_token)
