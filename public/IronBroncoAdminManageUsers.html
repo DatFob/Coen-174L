@@ -14,9 +14,9 @@
 	<script src="/__/firebase/init.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
-	<script src="ironbroncoadmin.js"></script>
+	<script src="ironbroncomanageusers.js"></script>
 </head>
-<body>
+<body onload="userData();">
 	<div id="nav_bar" style="padding-bottom: 3rem;">
 	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
 			<a class="navbar-brand" href="#">Iron Bronco</a>
@@ -44,13 +44,33 @@
 	  		</div>
 		</nav>
 	</div>
-	<main class="container">
-		<h1 style="padding-bottom: 3rem;">Manage Users</h1>
-		<div id="manageusers" class="container">
-			<div id="individualLeaders" class="container">
-				<!--list all the users in the array, no swimming, running, biking mileage necessary-->
-			</div>
+	<main class="container" style="float: left; width: 50%;">
+		<h1 style="padding-bottom: 3rem;">View Users</h1>
+		<div id="listOfUsers" class="container">
+			<p id="alphabeticalUsers" class="container">
+			</p>
 		</div>
+		<div class="infobBox" align="center" style="padding-top: 3rem;">
+			<button id="viewUsersBtn" onclick = "displayUsers();" type="button" class="btn btn-primary">View Users</button>
+		</div>
+	</main>
+	<main id="removeUser" class="container" style="float: left; width: 50%;">
+		<h1 style="padding-bottom: 3rem;">Remove a User</h1>
+		<form>
+			<div class="container" style="padding:1rem;">
+				<div class="row">
+					<div class="col-25">
+						<label for="user">User:</label>
+					</div>
+					<div class="col-75">
+						<input type="text" id="user" placeholder="User Name"/>
+					</div>
+				</div>
+			</div>
+			<div class="infobBox" align="center" style="padding-top: 3rem;">
+				<button id="removeUserBtn" onclick = "removeUser();" type="button" class="btn btn-primary">Remove User</button>
+			</div>
+		</form>
 	</main>
 	<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
