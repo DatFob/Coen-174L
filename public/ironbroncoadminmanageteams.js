@@ -1,5 +1,3 @@
-var userEmail = JSON.parse(localStorage.getItem('email'));
-var userName = JSON.parse(localStorage.getItem('userName'));
 var teams = [];
 var teamName;
 var uTeam, uSwim, uBike, uRun, uTotal;
@@ -60,8 +58,10 @@ function userData(user){
 
 function teamInfo(team) {
     teamDocRef.doc(team).get().then(function(doc) {
+        console.log(team);
+        console.log(doc);
         if (doc.exists) {
-            console.log("User data received");
+            console.log("Team data received");
             teamM1 = doc.data().member1;
             teamM2 = doc.data().member2;
             teamM3 = doc.data().member3;
@@ -78,29 +78,72 @@ function teamInfo(team) {
     });
 }
 
-//Finish removeUser()
+// Need to finish
+// deletes team but does not remove team from user
+// trouble accessing data from 'team'
+function removeTeam() {
+    var team = document.getElementById('team').value;
+    teamInfo(team);
+    if (teamExists(team, teams) == true) {
+        console.log(team);
+        // teamInfo(team);
+        console.log(teamM1);
+        if (teamM1 != null && teamM1 != '') {
+            userDocRef.doc(teamM1).update({ 
+                team: ''
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        console.log(teamM2);
+        if (teamM2 != null && teamM2 != '') {
+            userDocRef.doc(teamM2).update({ 
+                team: ''
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        console.log(teamM3);
+        if (teamM3 != null && teamM3 != '') {
+            userDocRef.doc(teamM3).update({ 
+                team: ''
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        deleteTeam(team);
+    }
+    else {
+        alert("Team does not exist.");
+    }
+}
+
+function deleteTeam(team) {
+    teamDocRef.doc(team).delete().then(function() {
+        console.log("Team successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing team: ", error);
+    });
+    alert(team + " was removed successfully. Please refresh the page to view changes.");
+}
+
+//Finish removeUserFromTeam()
 //need to remove from team then delete from database
-function removeUserFromTeam()
-{
-    var user = document.getElementById('user').value;
-    var team = document.getElementById('user').value;
+function removeUserFromTeam() {
+    var user = document.getElementById('userName').value;
+    var team = document.getElementById('teamName').value;
     if (teamExists(team, teams) == true) {
         uData(user);
-        userDocRef.doc(user).delete().then(function() {
-            console.log("User successfully deleted!");
-        }).catch(function(error) {
-            console.error("Error removing user: ", error);
-        });
-        if(uTeam != null && uTeam != '') {
-            teamInfo(uTeam);
-            if (teamCount == 1) {
-                teamDocRef.doc(uTeam).delete().then(function() {
-                    console.log("Team successfully deleted!");
-                }).catch(function(error) {
-                    console.error("Error removing team: ", error);
-                });
-            }
-            teamDocRef.doc(uTeam).update({ 
+        teamInfo(team);
+        if (user == teamM1) {
+            teamDocRef.doc(team).update({
+                member1: '',
                 swim: teamSwimming - uSwim,
                 run: teamRunning - uRun,
                 bike: teamBiking - uBike,
@@ -111,43 +154,51 @@ function removeUserFromTeam()
             }).catch(function(error){
                 console.log('error occured');
             });
-            if (user == teamM1) {
-                teamDocRef.doc(uTeam).update({ 
-                    member1: ''
-                }).then(function(){
-                    console.log('success'); 
-                }).catch(function(error){
-                    console.log('error occured');
-                });
-            }
-            else if (user == teamM2) {
-                teamDocRef.doc(uTeam).update({ 
-                    member2: ''
-                }).then(function(){
-                    console.log('success'); 
-                }).catch(function(error){
-                    console.log('error occured');
-                });
-            }
-            else if (user == teamM3) {
-                teamDocRef.doc(uTeam).update({ 
-                    member3: ''
-                }).then(function(){
-                    console.log('success'); 
-                }).catch(function(error){
-                    console.log('error occured');
-                });
-            }
         }
-        alert(user + " was removed. Please refresh the page to view this change.");
+        else if (user == teamM2) {
+            teamDocRef.doc(team).update({
+                member2: '',
+                swim: teamSwimming - uSwim,
+                run: teamRunning - uRun,
+                bike: teamBiking - uBike,
+                total: teamTotal - uTotal,
+                memberCnt: doc.data().memberCnt - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        else if (user == teamM3) {
+            teamDocRef.doc(team).update({
+                member3: '',
+                swim: teamSwimming - uSwim,
+                run: teamRunning - uRun,
+                bike: teamBiking - uBike,
+                total: teamTotal - uTotal,
+                memberCnt: doc.data().memberCnt - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+        }
+        teamInfo(team);
+        if (teamCount <= 0) {
+            teamDocRef.doc(uTeam).delete().then(function() {
+                console.log("Team successfully deleted!");
+            }).catch(function(error) {
+                console.error("Error removing team: ", error);
+            });
+        }
+        alert(user + " was removed from " + team + ". Please refresh the page to view this change.");
     }
     else {
         alert("Invalid entry. This user does not exist.");
     }
 }
 
-function teamExists(team, teams)
-{
+function teamExists(team, teams) {
     for(var i = 0; i < teams.length; i++) {
         if(teams[i] == team){
             return true;
