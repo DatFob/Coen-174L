@@ -14,9 +14,9 @@
 	<script src="/__/firebase/init.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
-	<script src="ironbroncoadminmnageteams.js"></script>
+	<script src="ironbroncoadminmanageteams.js"></script>
 </head>
-<body>
+<body onload="teamData();">
 	<div id="nav_bar" style="padding-bottom: 3rem;">
 	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
 			<a class="navbar-brand" href="#">Iron Bronco</a>
@@ -56,7 +56,7 @@
 		</div>
 	</main>
 	<main id="removeTeam" class="container" style="float: left; width: 50%;">
-		<h2 style="padding-bottom: 3rem;">Remove a Team</h2>
+		<h2 style="padding-bottom: 1.5rem;">Remove a Team</h2>
 		<form>
 			<div class="container" style="padding:1rem;">
 				<div class="row">
@@ -68,11 +68,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="infobBox" align="center" style="padding-top: 3rem;">
+			<div class="infobBox" align="center" style="padding-top: 1.5rem; padding-bottom: 3rem;">
 				<button id="removeTeamBtn" onclick = "removeTeam();" type="button" class="btn btn-primary">Remove Team</button>
 			</div>
 		</form>
-		<h2 style="padding-bottom: 3rem;">Remove a User from a Team</h2>
+		<h2 style="padding-bottom: 1.5rem;">Remove a User from a Team</h2>
 		<form>
 			<div class="container" style="padding:1rem;">
 				<div class="row">
@@ -92,7 +92,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="infobBox" align="center" style="padding-top: 3rem;">
+			<div class="infobBox" align="center" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
 				<button id="removeUserFromTeamBtn" onclick = "removeUserFromTeam();" type="button" class="btn btn-primary">Remove User from Team</button>
 			</div>
 		</form>

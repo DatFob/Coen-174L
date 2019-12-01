@@ -1,11 +1,9 @@
 var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var teams = [];
-var users = [];
-var topTeams = [];
-var topUsers = [];
 var teamName;
-var topUsersCnt, topTeamsCnt;
+var uTeam, uSwim, uBike, uRun, uTotal;
+var teamM1, teamM2, teamM3, teamSwimming, teamRunning, teamBiking, teamTotal, teamCount;
 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -23,57 +21,139 @@ var db = project.firestore();
 var userDocRef = db.collection("users");
 var teamDocRef = db.collection("teams");
 
-function displayUsers(){
-    console.log("users:");
-    console.log(users);
-    users.forEach(displayEachUser);
-}
 
 function displayTeams(){
-    console.log("teams:");
-    console.log(teams);
+    document.getElementById("alphabeticalTeams").innerHTML = "";
     teams.forEach(displayEachTeam);
 }
 
 function displayEachTeam(item, index) {
-    document.getElementById("teamLeaders").innerHTML += teams[index].name + " " + teams[index].total + " miles" + "<br>"; 
-}
-
-function displayEachUser(item, index) {
-    document.getElementById("individualLeaders").innerHTML += users[index].name + " " + users[index].total + " miles" + "<br>"; 
-}
-
-function data(){
-    userData();
-    teamData();
-    console.log("Team and user data retrieved");
-}
-
-function userData(){
-    userDocRef.orderBy('total').get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
-            users.push({name:doc.id, total:doc.data().total});
-        });
-    });
+    document.getElementById("alphabeticalTeams").innerHTML += teams[index] + "<br>"; 
 }
 
 function teamData(){
-    teamDocRef.orderBy('total').get().then(function(querySnapshot) {
+    teamDocRef.orderBy('name').get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
-            teams.push({name:doc.id, total:doc.data().total});
+            teams.push(doc.id);
         });
     });
 }
 
-function displayLeaderboards(){
-    document.getElementById("individualLeaders").innerHTML = "";
-    document.getElementById("teamLeaders").innerHTML = "";
-    teams.reverse();
-    users.reverse();
-    displayUsers();
-    displayTeams();
+function userData(user){
+    var userRef = db.collection("users").doc(user);
+    userRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("User data received");
+            uTeam = doc.data().team;
+            uRun = doc.data().run;
+            uBike = doc.data().bike;
+            uSwim = doc.data().swim;
+            uTotal = doc.data().total;
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+function teamInfo(team) {
+    teamDocRef.doc(team).get().then(function(doc) {
+        if (doc.exists) {
+            console.log("User data received");
+            teamM1 = doc.data().member1;
+            teamM2 = doc.data().member2;
+            teamM3 = doc.data().member3;
+            teamSwimming = doc.data().swim;
+            teamRunning = doc.data().run;
+            teamBiking = doc.data().bike;
+            teamTotal = doc.data().total;
+            teamCount = doc.data().memberCnt;
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+}
+
+//Finish removeUser()
+//need to remove from team then delete from database
+function removeUserFromTeam()
+{
+    var user = document.getElementById('user').value;
+    var team = document.getElementById('user').value;
+    if (teamExists(team, teams) == true) {
+        uData(user);
+        userDocRef.doc(user).delete().then(function() {
+            console.log("User successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing user: ", error);
+        });
+        if(uTeam != null && uTeam != '') {
+            teamInfo(uTeam);
+            if (teamCount == 1) {
+                teamDocRef.doc(uTeam).delete().then(function() {
+                    console.log("Team successfully deleted!");
+                }).catch(function(error) {
+                    console.error("Error removing team: ", error);
+                });
+            }
+            teamDocRef.doc(uTeam).update({ 
+                swim: teamSwimming - uSwim,
+                run: teamRunning - uRun,
+                bike: teamBiking - uBike,
+                total: teamTotal - uTotal,
+                memberCnt: doc.data().memberCnt - 1
+            }).then(function(){
+                console.log('success'); 
+            }).catch(function(error){
+                console.log('error occured');
+            });
+            if (user == teamM1) {
+                teamDocRef.doc(uTeam).update({ 
+                    member1: ''
+                }).then(function(){
+                    console.log('success'); 
+                }).catch(function(error){
+                    console.log('error occured');
+                });
+            }
+            else if (user == teamM2) {
+                teamDocRef.doc(uTeam).update({ 
+                    member2: ''
+                }).then(function(){
+                    console.log('success'); 
+                }).catch(function(error){
+                    console.log('error occured');
+                });
+            }
+            else if (user == teamM3) {
+                teamDocRef.doc(uTeam).update({ 
+                    member3: ''
+                }).then(function(){
+                    console.log('success'); 
+                }).catch(function(error){
+                    console.log('error occured');
+                });
+            }
+        }
+        alert(user + " was removed. Please refresh the page to view this change.");
+    }
+    else {
+        alert("Invalid entry. This user does not exist.");
+    }
+}
+
+function teamExists(team, teams)
+{
+    for(var i = 0; i < teams.length; i++) {
+        if(teams[i] == team){
+            return true;
+        } 
+    }
+    return false;
 }
 
 function signOut() {
