@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Iron Bronco Admin Manage Users</title>
+	<title>Iron Bronco Admin Approve Team</title>
 	<meta charset="UTF-8">
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="1042080648547-aauefq55pncnlprn62j0avqj8c8i5a1n.apps.googleusercontent.com">
@@ -14,9 +14,9 @@
 	<script src="/__/firebase/init.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
-	<script src="ironbroncomanageusers.js"></script>
+	<script src="ironbroncoadminapproveteam.js"></script>
 </head>
-<body onload="userData();">
+<body onload="requestedTeamData();">
 	<div id="nav_bar" style="padding-bottom: 3rem;">
 	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
 			<a class="navbar-brand" href="#">Iron Bronco</a>
@@ -47,32 +47,32 @@
 	  		</div>
 		</nav>
 	</div>
-	<h1 style="padding-bottom: 3rem;">Manage Users</h1>
-	<main class="container" style="float: left; width: 50%;">
-		<h2 style="padding-bottom: 3rem;">View Users</h2>
-		<div id="listOfUsers" class="container">
-			<p id="alphabeticalUsers" class="container">
+	<main class="container">
+		<h1 style="padding-bottom: 3rem;">Approve Teams</h1>
+		<div id="listOfTeams" class="container" style="float: left; width: 50%;">
+			<h2>Requested Teams</h2>
+			<p id="requestedTeams" class="container" text-align="center">
 			</p>
-		</div>
-		<div class="infobBox" align="center" style="padding-top: 3rem;">
-			<button id="viewUsersBtn" onclick = "displayUsers();" type="button" class="btn btn-primary">View Users</button>
+			<div class="infobBox" align="center">
+				<button id="infoBtn" onclick="displayRequestedTeams();" type="button" class="btn btn-primary">Show Requested Teams</button>
+			</div>
 		</div>
 	</main>
-	<main id="removeUser" class="container" style="float: left; width: 50%;">
-		<h2 style="padding-bottom: 3rem;">Remove a User</h2>
+	<main id="approveTeam" class="container" style="float: left; width: 50%;">
+		<h2 style="padding-bottom: 1.5rem;">Approve Team</h2>
 		<form>
 			<div class="container" style="padding:1rem;">
 				<div class="row">
 					<div class="col-25">
-						<label for="user">User:</label>
+						<label for="team">Team:</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="user" placeholder="User Name"/>
+						<input type="text" id="team" placeholder="Team Name"/>
 					</div>
 				</div>
 			</div>
-			<div class="infobBox" align="center" style="padding-top: 3rem;">
-				<button id="removeUserBtn" onclick = "removeUser();" type="button" class="btn btn-primary">Remove User</button>
+			<div class="infobBox" align="center" style="padding-top: 1.5rem; padding-bottom: 3rem;">
+				<button id="approveTeamBtn" onclick = "approveTeam();" type="button" class="btn btn-primary">Remove Team</button>
 			</div>
 		</form>
 	</main>
