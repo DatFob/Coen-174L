@@ -43,9 +43,9 @@ function approveTeam() {
     teamData(teamName);
     db.collection('teams').doc(teamName).set({
         name: teamName,
-        member1: userName,
-        member2: '',
-        member3: '',    
+        member1: member1,
+        member2: member2,
+        member3: member3,    
         swim: teamSwimming,
         run: teamRunning,
         bike: teamBiking,
@@ -69,7 +69,7 @@ function deleteOldTeam(teamName){
 }
 
 function teamToUser(team){
-    db.collection("users").doc(userName).update({
+    db.collection("users").doc(member1).update({
         team: team 
     })
     .then(function() {
