@@ -24,6 +24,11 @@ function saveLoginInfo(userName, userEmail){
     if (docSnapshot.exists) {
       userRef.onSnapshot((doc) => {
           console.log("user exists, will not create a new account...");
+          if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin')
+    {
+        return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
+    }
+    return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
       });
     } else {
       console.log("user does not exist, saving new user to database..");
@@ -37,12 +42,17 @@ function saveLoginInfo(userName, userEmail){
         total: 0
     }).then(function(){
       console.log('success'); 
+      if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin')
+    {
+        return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
+    }
+    return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
     }).catch(function(error){
       console.log('error occured');
     });
     }
 });
-  
+    
 }
 
 function onSignIn(googleUser) 
@@ -79,13 +89,8 @@ function onSignIn(googleUser) {
   localStorage.setItem('email',JSON.stringify(userEmail));
   saveLoginInfo(userName,userEmail);
   // The ID token you need to pass to your backend:
-  var id_token = googleUser.getAuthResponse().id_token;
-  console.log("ID Token: " + id_token);
-  if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin')
-  {
-     return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
-  }
-  return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
+  /*var id_token = googleUser.getAuthResponse().id_token;
+  console.log("ID Token: " + id_token);*/
 }
 
 function signOut() {

@@ -39,8 +39,7 @@ function teamData(){
 }
 
 function userData(user){
-    var userRef = db.collection("users").doc(user);
-    userRef.get().then(function(doc) {
+    db.collection("users").doc(user).get().then(function(doc) {
         if (doc.exists) {
             console.log("User data received");
             uTeam = doc.data().team;
@@ -139,11 +138,13 @@ function removeUserFromTeam() {
     var user = document.getElementById('userName').value;
     var team = document.getElementById('teamName').value;
     if (teamExists(team, teams) == true) {
-        uData(user);
+        userData(user);
         teamInfo(team);
         if (user == teamM1) {
-            teamDocRef.doc(team).update({
-                member1: '',
+            db.collection('teams').doc(team).update({
+                member1: teamM2,
+                member2: teamM3,
+                member3: '',
                 swim: teamSwimming - uSwim,
                 run: teamRunning - uRun,
                 bike: teamBiking - uBike,
@@ -157,7 +158,8 @@ function removeUserFromTeam() {
         }
         else if (user == teamM2) {
             teamDocRef.doc(team).update({
-                member2: '',
+                member2: teamM3,
+                member3: '',
                 swim: teamSwimming - uSwim,
                 run: teamRunning - uRun,
                 bike: teamBiking - uBike,
