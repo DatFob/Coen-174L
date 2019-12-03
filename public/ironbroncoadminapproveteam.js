@@ -1,8 +1,16 @@
+/* COEN 174l 2019 Fall
+   Emma Allegrucci
+   Joseph Sindelar
+   Mike Zhao
+   The Iron Bronco Project*/
+
 var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var teamName, teamRunning, teamBiking, teamSwimming, teamTotal, member1, member2, member3, teamCount;
 var requestedTeams = [];
 
+
+//Below is firebase configuration and set up code
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
     authDomain: "test-login-1573079166139.firebaseapp.com",
@@ -18,14 +26,18 @@ var project = firebase.initializeApp(firebaseConfig);
 var db = project.firestore();
 var requestedTeamsDocRef = db.collection("requestedTeams");
 
+
+//function to display all requested teams' names
 function displayRequestedTeams(){
     document.getElementById("requestedTeams").innerHTML = "";
     requestedTeams.forEach(displayEachRequestedTeam);
 }
 
+//function to display requested teams' names
 function displayEachRequestedTeam(item, index) {
     document.getElementById("requestedTeams").innerHTML += requestedTeams[index] + "<br>"; 
 }
+
 
 function requestedTeamData(){
     requestedTeamsDocRef.orderBy('name').get().then(function(querySnapshot) {
@@ -37,7 +49,7 @@ function requestedTeamData(){
     });
 }
 
-//TODO: below, should be similar to remove team in manageteams
+//TODO: Approve teams, move from collection "requested teams" to collection "teams"
 function approveTeam() {
     teamName = document.getElementById('team').value;
     teamData(teamName);
@@ -60,6 +72,7 @@ function approveTeam() {
     deleteOldTeam(teamName);
 }
 
+//Delete the team doc in requested, used in approveTeam()
 function deleteOldTeam(teamName){
     db.collection("requestedTeams").doc(teamName).delete().then(function() {
         console.log('successfully deleted team in requested section');
@@ -68,6 +81,7 @@ function deleteOldTeam(teamName){
         });
 }
 
+//Update team name in user's "team" section, used in approveTeam()
 function teamToUser(team){
     db.collection("users").doc(member1).update({
         team: team 
@@ -81,6 +95,8 @@ function teamToUser(team){
     });
 }
 
+
+//use input teamName to grab team data and save those into variables
 function teamData(teamName){
     var teamRef = db.collection('requestedTeams').doc(teamName);
     teamRef.get().then(function(doc) {
@@ -103,6 +119,8 @@ function teamData(teamName){
     });
 }
 
+
+//sign out function, signs out users
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {

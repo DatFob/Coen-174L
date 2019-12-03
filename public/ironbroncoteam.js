@@ -1,3 +1,9 @@
+/* COEN 174l 2019 Fall
+   Emma Allegrucci
+   Joseph Sindelar
+   Mike Zhao
+   The Iron Bronco Project*/
+
 var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var teamName, teamCount, teamSwimming, teamRunning, teamBiking, teamTotal;
@@ -6,6 +12,8 @@ var teamMember1, member1Swim, member1Run, member1Bike, member1Total;
 var teamMember2, member2Swim, member2Run, member2Bike, member2Total;
 var teamMember3, member3Swim, member3Run, member3Bike, member3Total;
 
+
+//Below is firebase code for set up and configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
     authDomain: "test-login-1573079166139.firebaseapp.com",
@@ -23,6 +31,8 @@ var userRef = db.collection("users").doc(userName);
 var userDocRef = db.collection("users");
 var teamDocRef = db.collection("teams");
 
+
+//If user has a team, grab team name.
 function userTeamName(){
     userRef.get().then(function(doc) {
         if (doc.exists) {
@@ -32,7 +42,6 @@ function userTeamName(){
                 teamData(teamName);
             }
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
@@ -40,6 +49,8 @@ function userTeamName(){
     });
 }
 
+
+//Grab team data using input teamName then save into variables
 function teamData(teamName){
     var teamRef = teamDocRef.doc(teamName);
     teamRef.get().then(function(doc) {
@@ -62,6 +73,8 @@ function teamData(teamName){
     });
 }
 
+
+//Grab user data using input member
 function memberData(member){
     var memRef = db.collection("users").doc(member);
     console.log(member);
@@ -84,6 +97,7 @@ function memberData(member){
     });
 }
 
+//Display team members in a team
 function displayTeam(){
     if(teamName != '' && teamName != null){
         displayMember1();
@@ -105,6 +119,8 @@ function displayTeam(){
     }
 }
 
+
+//Display member 1's data and progress
 function displayMember1(){
     var memRef = db.collection("users").doc(teamMember1);
     memRef.get().then(function(doc) {
@@ -128,6 +144,8 @@ function displayMember1(){
     });
 }
 
+
+//Display member 2's data and progress
 function displayMember2(){
     var memRef = db.collection("users").doc(teamMember2);
     memRef.get().then(function(doc) {
@@ -151,6 +169,8 @@ function displayMember2(){
     });
 }
 
+
+//Display member 3's data and progress
 function displayMember3(){
     var memRef = db.collection("users").doc(teamMember3);
     memRef.get().then(function(doc) {
@@ -174,6 +194,8 @@ function displayMember3(){
     });
 }
 
+
+//Delete user from team, update user & team data
 function leaveTeam() {
     if (teamName != null && teamName != '')
     {
@@ -241,6 +263,8 @@ function leaveTeam() {
     }
 }
 
+
+//remove member 1 from team
 function remove1() {
     if (teamMember1) {
         memberData(teamMember1);
@@ -271,6 +295,8 @@ function remove1() {
     displayTeam();
 }
 
+
+//remove member 2 from team
 function remove2() {
     if (teamMember2) {
         memberData(teamMember2);
@@ -302,6 +328,8 @@ function remove2() {
     displayTeam();
 }
 
+
+//remove member 3 from team
 function remove3() {
     if (teamMember1) {
         memberData(teamMember3);
@@ -332,6 +360,8 @@ function remove3() {
     displayTeam();
 }
 
+
+//signs user out 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {

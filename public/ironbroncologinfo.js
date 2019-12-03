@@ -1,10 +1,16 @@
-/* Each account will be created as an object with attributes of userName and passWord*/
+/* COEN 174l 2019 Fall
+   Emma Allegrucci
+   Joseph Sindelar
+   Mike Zhao
+   The Iron Bronco Project*/
+
 var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var userBiking, userRunning, userSwimming;
 var teamName, teamBiking, teamRunning, teamSwimming;
 var biking, running, swimming;
 
+//Below is firebase configuration and set up code
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
     authDomain: "test-login-1573079166139.firebaseapp.com",
@@ -21,6 +27,8 @@ var db = project.firestore();
 var userRef = db.collection("users").doc(userName);
 var teamDocRef = db.collection("teams");
 
+
+//Grab user data and save into variables
 function userData(){
     userRef.get().then(function(doc) {
         if (doc.exists) {
@@ -41,6 +49,8 @@ function userData(){
     });
 }
 
+
+//Grab team data and save into variables
 function teamData(teamName){
     var teamRef = teamDocRef.doc(teamName);
     teamRef.get().then(function(doc) {
@@ -58,6 +68,8 @@ function teamData(teamName){
     });
 }
 
+
+//update user mileages data
 function updateUserMileageInfo(userName){
     var tempBike, tempRun, tempSwim, tempTotal;
     tempBike = biking + userBiking;
@@ -76,6 +88,7 @@ function updateUserMileageInfo(userName){
     });
 }
 
+//update team mileages data
 function updateTeamMileageInfo(teamName){
     var tempBike, tempRun, tempSwim, tempTotal;
     tempBike = biking + teamBiking;
@@ -94,6 +107,7 @@ function updateTeamMileageInfo(teamName){
     });
 }
 
+//update user mileages and team mileages
 function updateMileage(){
     biking = parseInt(document.getElementById('biking').value);
     running = parseInt(document.getElementById('running').value);
@@ -102,15 +116,9 @@ function updateMileage(){
     if (teamName != '' && teamName != null) {
         updateTeamMileageInfo(teamName);
     }
-    // var notify = $.notify({
-    //     title: userName,
-    //     message: "Your progress has been updated"
-    // },{
-    //     type: 'danger'
-    // });
-    // return notify;
 }
 
+//Delete user from team, update user and team data
 function leaveTeam() {
     if (teamName != null && teamName != '')
     {
@@ -178,6 +186,8 @@ function leaveTeam() {
     }
 }
 
+
+//signs users out of the system
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {

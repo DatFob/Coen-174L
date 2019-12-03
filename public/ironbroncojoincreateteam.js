@@ -1,3 +1,8 @@
+/* COEN 174l 2019 Fall
+   Emma Allegrucci
+   Joseph Sindelar
+   Mike Zhao
+   The Iron Bronco Project*/
 var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var newTeamName, joinTeamName, memberCount;
@@ -6,6 +11,8 @@ var teamBiking, teamSwimming, teamRunning, teamTotal;
 var teamCount, teamName;
 var member1, member2, member3;
 
+
+//Below is code to set up and configure firebase 
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
     authDomain: "test-login-1573079166139.firebaseapp.com",
@@ -23,11 +30,13 @@ var userDocRef = db.collection("users");
 var userRef = db.collection("users").doc(userName);
 var teamDocRef = db.collection("teams");
 
+//HTML only supports one "onload()", start() is used in order evoke two functions
 function start(){
     userData();
     teamData(teamName);
 }
 
+//grab user data and save it to variables
 function userData(){
     userRef.get().then(function(doc) {
         if (doc.exists) {
@@ -37,13 +46,7 @@ function userData(){
             userSwimming = doc.data().swim;
             userTotal = doc.data().total;
             teamName = doc.data().team;
-            /*if (teamName != null && teamName != '')
-            {
-                teamData(teamName);
-            }*/
-
         } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
         }
     }).catch(function(error) {
@@ -51,6 +54,7 @@ function userData(){
     });
 }
 
+//grab team's data and save it to variables
 function teamData(team){
     var teamRef = teamDocRef.doc(team);
     teamRef.get().then(function(doc) {
@@ -73,6 +77,7 @@ function teamData(team){
     });
 }
 
+//Check if user is already in a team or no 
 function checkTeam(){
     console.log("Check Team Function Evoked...");
     if(teamName != '' && teamName != null){
@@ -86,6 +91,7 @@ function checkTeam(){
     }
 }
 
+//update user's "team" category in database
 function teamToUser(team){
     userRef.update({
         team: team 
@@ -99,6 +105,7 @@ function teamToUser(team){
     });
 }
 
+//Send create team request to database and wait for admin to approve team name
 function createTeam(){
     if(checkTeam() == true){
         window.alert('User already in a team...');
@@ -131,7 +138,7 @@ function createTeam(){
     window.alert("Please wait for 2 business days for admin to approve new team.");
 }
 
-
+//Join a team if user does not have a team and the team does not have 3 members
 function joinTeam(){
     if(checkTeam() == true){
         window.alert('User already in a team');
@@ -151,16 +158,15 @@ function joinTeam(){
     if(isTeamFull(joinTeamName) != true){
         setJoinMember();
     }
-    //alert("You have joined the team " + joinTeamName + ".");
 }
 
+//Check if a team exists in database, used in joinTeam()
 function existance(x){
     var ref = db.collection("teams").doc(x);
     ref.get().then(function(doc) {
         if (doc.exists) {
             return true;
         } else {
-            // doc.data() will be undefined in this case
             window.alert('team does not exist...');
             return false;
         }
@@ -169,6 +175,7 @@ function existance(x){
     });
 }
 
+//Set member and update mileages, three situations: one member, two member or team is full
 function setJoinMember(){
     if(memberCount == 1){
         teamDocRef.doc(joinTeamName).update({
@@ -185,7 +192,6 @@ function setJoinMember(){
             console.log("New team member successfully added!");
         })
         .catch(function(error) {
-            // The document probably doesn't exist.
             console.error("Error adding second member: ", error);
         });
         teamToUser(joinTeamName);
@@ -230,7 +236,6 @@ function isTeamFull(team){
             }
         }
         else {
-            // doc.data() will be undefined in this case
             console.log("isTeamFull: Team does not exist...");
             return true;
         }
@@ -239,6 +244,7 @@ function isTeamFull(team){
     });
 }
 
+//Delete user from team, and update team & user data
 function leaveTeam() {
     if (teamName != null && teamName != '')
     {
@@ -314,6 +320,7 @@ function leaveTeam() {
     }
 }
 
+//signs users out of the system
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {

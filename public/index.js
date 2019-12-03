@@ -1,5 +1,11 @@
-/* Each account will be created as an object with attributes of userName and passWord*/
+/* COEN 174l 2019 Fall
+   Emma Allegrucci
+   Joseph Sindelar
+   Mike Zhao
+   The Iron Bronco Project*/
 
+  
+//Below is firebase configuration & set up code
 var userEmail, userName;
 const firebaseConfig = {
   apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -17,7 +23,7 @@ var collectionRef = firestore.collection("users");
 var userRef;
 var docRef = firestore.doc('users/Test');
 
-
+//Saves user name and user email to the fire base then direct them to home page, if email is admin's email then he will be redirected to the admin page
 function saveLoginInfo(userName, userEmail){
   console.log('Save Data function evoked');
   userRef.get().then((docSnapshot) => {
@@ -55,6 +61,8 @@ function saveLoginInfo(userName, userEmail){
     
 }
 
+
+//This function use Google API to sign into our system
 function onSignIn(googleUser) 
 {
     var id_token = googleUser.getAuthResponse().id_token;
@@ -73,6 +81,7 @@ function onSignIn(googleUser)
     alert(profile.getName());
 }
 
+//This function use Google API to sign into our system
 function onSignIn(googleUser) {
   // Useful data for your client-side scripts:
   var profile = googleUser.getBasicProfile();
@@ -93,6 +102,7 @@ function onSignIn(googleUser) {
   console.log("ID Token: " + id_token);*/
 }
 
+//sign out function, signs user out of the system
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
@@ -100,6 +110,7 @@ function signOut() {
     });
 }
 
+//Part of Google authentication, used to verify Google's id token
 function verifyIdToken(id_token)
 {
   userEmail = profile.getEmail();
