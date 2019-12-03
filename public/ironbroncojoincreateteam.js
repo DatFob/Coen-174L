@@ -111,7 +111,7 @@ function createTeam(){
         window.alert("Invalid. No team name entered in field.");
         return;
     }
-    teamDocRef.doc(newTeamName).set({
+    db.collection('requestedTeams').doc(newTeamName).set({
         name: newTeamName,
         member1: userName,
         member2: '',
@@ -127,8 +127,8 @@ function createTeam(){
     }).catch(function(error){
         console.log('error occured');
     });
-    teamToUser(newTeamName);
-    alert("You have created the team " + newTeamName + ".");
+    //teamToUser(newTeamName);
+    window.alert("Please wait for 2 business days for admin to approve new team.");
 }
 
 
