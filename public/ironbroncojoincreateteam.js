@@ -123,7 +123,7 @@ function createTeam(){
         memberCnt: 1
     }).then(function(){
         teamName = newTeamName;
-        console.log('success'); 
+        console.log('successfully sent new team request'); 
     }).catch(function(error){
         console.log('error occured');
     });
