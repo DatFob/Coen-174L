@@ -1,3 +1,9 @@
+<!--COEN 174l 2019 Fall
+    Emma Allegrucci
+    Joseph Sindelar
+    Mike Zhao
+    The Iron Bronco Project-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +22,12 @@
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
 	<script src="ironbroncoteam.js"></script>
 </head>
+<!-- on opening this page will load the user's team name and team data -->
 <body onload="userTeamName()">
+	<!-- The div below contains the nav bar display on every general user page -->
 	<div id="nav_bar" style="padding-bottom: 3rem;">
 	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
+	    	<!-- This nav item links to the home page -->
 			<a class="navbar-brand" href="#">Iron Bronco</a>
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -26,23 +35,32 @@
 			<div class="navbar-collapse collapse" id="navbarsExampleDefault" style="">
 	    		<ul class="navbar-nav mr-auto">
 	      			<li class="nav-item active">
-	        			<a class="nav-link" href="IronBroncoHome.html">Home<span class="sr-only">(current)</span></a>
+	      				<!-- This nav item links to the current page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html">Home<span class="sr-only">(current)</span></a>
 	      			</li>
 	      			<li class="nav-item">
-	        			<a class="nav-link" href="IronBroncoLogInfo.html">Log</a>
+	      				<!-- This nav item links to the Log Info page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoLogInfo.html">Log</a>
 	      			</li>
 	      			<li class="nav-item">
-	        			<a class="nav-link" href="IronBroncoTeam.html">Team</a>
+	      				<!-- This nav item links to the team page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoTeam.html">Team</a>
 	      			</li>
 	      			<li class="nav-item">
-	        			<a class="nav-link" href="IronBroncoLeaderboards.html">Leaderboards</a>
+	      				<!-- This nav item links to the Leaderboards page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoLeaderboards.html">Leaderboards</a>
 	      			</li>
+	      			<!-- This drop down menu button opens a dropdown menu -->
 	      			<li class="nav-item dropdown">
 	        			<a class="nav-link dropdown-toggle" role="button" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
 	        			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	          				<a class="dropdown-item" href="IronBroncoLogInfo.html">Log Info</a>
-	          				<a class="dropdown-item" href="IronBroncoJoinCreateTeam.html">Join/Create a Team</a>
+	          				<!-- This drop down item links the user to the Log Info page when clicked on -->
+	          				<a class="dropdown-item" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoLogInfo.html">Log Info</a>
+	          				<!-- This drop down item links the user to the Join/Create a Team page when clicked on -->
+	          				<a class="dropdown-item" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoJoinCreateTeam.html">Join/Create a Team</a>
+	          				<!-- This drop down item allows the user to leave their team when clicked on -->
 	          				<a class="dropdown-item" onclick="leaveTeam();">Leave Team</a>
+	          				<!-- This drop down item logs out the user when clicked on -->
 	          				<a class="dropdown-item" href="https://test-login-1573079166139.firebaseapp.com/" onclick="signOut();">Log Out</a>
 	        			</div>
 	      			</li>
@@ -50,39 +68,57 @@
 	  		</div>
 		</nav>
 	</div>
+	<!-- This container contains the information about the user and the user's team members if they have any -->
 	<div id="teammembers" class="container">
 		<h1 style="padding-bottom: 3rem;">Team Members</h1>
+		<!-- This div contains member1's progress -->
 		<div id="member1" class="container" style="float: left; width: 33%; padding-right: 1.5rem; padding-left: 1.5rem; padding-bottom: 3rem;">
 			<h2>Member 1</h2>
+			<!-- This paragraph displays the member1's name -->
 			<p id="user1Name" style="padding-top: 2rem;"></p>
+			<!-- This paragraph displays the member1's swim progress -->
     		<p id="user1Swim" style="padding-top: 2rem;"></p>
+    		<!-- This paragraph displays the member1's run progress -->
     		<p id="user1Run"></p>
+    		<!-- This paragraph displays the member1's bike progress -->
     		<p id="user1Bike"></p>
+	  		<!-- This button will remove the member above from the team when clicked -->
 			<div class="container" style="align-items: center; padding-top: 3rem;">
 	  			<button class="btn btn-lg btn-primary btn-block" onclick="remove1();" type="submit">Remove</button>
 	  		</div>
 		</div>
+		<!-- This div contains member2's progress -->
 		<div id="member2" class="container" style="float: left; width: 33%; padding-right: 1.5rem; padding-left: 1.5rem; padding-bottom: 3rem;">
 			<h2>Member 2</h2>
+			<!-- This paragraph displays the member2's name -->
 			<p id="user2Name" style="padding-top: 2rem;"></p>
+			<!-- This paragraph displays the member2's swim progress -->
     		<p id="user2Swim" style="padding-top: 2rem;"></p>
+    		<!-- This paragraph displays the member2's run progress -->
     		<p id="user2Run"></p>
+    		<!-- This paragraph displays the member2's bike progress -->
     		<p id="user2Bike"></p>
-    		<p id="nomember2"></p>
+	  		<!-- This button will remove the member above from the team when clicked -->
 			<div class="container" style="align-items: center; padding-top: 3rem;">
 	  			<button class="btn btn-lg btn-primary btn-block" onclick="remove2();" type="submit">Remove</button>
 	  		</div>
+	  		<!-- This button will display all the team information when clicked -->
 	  		<div class="infobBox" align="center" style="padding-top: 3rem;">
 				<button id="myBtn" onclick="displayTeam();" type="button" class="btn btn-primary">Show Team</button>
 			</div>
 		</div>
+		<!-- This div contains member3's progress -->
 		<div id="member3" class="container" style="float: left; width: 33%; padding-right: 1.5rem; padding-left: 1.5rem; padding-bottom: 3rem;">
 			<h2>Member 3</h2>
+			<!-- This paragraph displays the member3's name -->
 			<p id="user3Name" style="padding-top: 2rem;"></p>
+			<!-- This paragraph displays the member3's swim progress -->
     		<p id="user3Swim" style="padding-top: 2rem;"></p>
+    		<!-- This paragraph displays the member3's run progress -->
     		<p id="user3Run"></p>
+    		<!-- This paragraph displays the member3's bike progress -->
     		<p id="user3Bike"></p>
-    		<p id="nomember3"></p>
+	  		<!-- This button will remove the member above from the team when clicked -->
 			<div class="container" style="align-items: center; padding-top: 3rem;">
 	  			<button class="btn btn-lg btn-primary btn-block" onclick="remove3();" type="submit">Remove</button>
 	  		</div>

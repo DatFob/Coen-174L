@@ -10,7 +10,6 @@ var userBiking, userRunning, userSwimming, userTotal;
 var teamName, teamBiking, teamRunning, teamSwimming, teamTotal, teamCount;
 var member1, member2, member3;
 
-
 //Below is firebase configuration and set up code
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -73,7 +72,6 @@ function teamData(teamName){
     });
 }
 
-
 //display individual and team progress if user is in a team
 function displayProgress()
 {
@@ -89,7 +87,6 @@ function displayProgress()
         document.getElementById("teamSwim").innerHTML = "You are not a member of a team. Click 'Join/Create a Team' to join one.";
     }
 }
-
 
 //Delete user from team, update new team data such as running, biking and swimming mileages as well as user's data
 function leaveTeam() {

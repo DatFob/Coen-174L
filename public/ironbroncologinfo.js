@@ -27,7 +27,6 @@ var db = project.firestore();
 var userRef = db.collection("users").doc(userName);
 var teamDocRef = db.collection("teams");
 
-
 //Grab user data and save into variables
 function userData(){
     userRef.get().then(function(doc) {
@@ -49,7 +48,6 @@ function userData(){
     });
 }
 
-
 //Grab team data and save into variables
 function teamData(teamName){
     var teamRef = teamDocRef.doc(teamName);
@@ -67,7 +65,6 @@ function teamData(teamName){
         console.log("Error getting document:", error);
     });
 }
-
 
 //update user mileages data
 function updateUserMileageInfo(userName){
@@ -185,7 +182,6 @@ function leaveTeam() {
         alert("Unable to leave a team since you are not a member of one.");
     }
 }
-
 
 //signs users out of the system
 function signOut() {

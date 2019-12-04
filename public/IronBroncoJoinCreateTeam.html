@@ -1,3 +1,9 @@
+<!--COEN 174l 2019 Fall
+    Emma Allegrucci
+    Joseph Sindelar
+    Mike Zhao
+    The Iron Bronco Project-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +22,12 @@
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
 	<script src="ironbroncojoincreateteam.js"></script>
 </head>
+<!-- on opening this page will load the user's data and the team data from the database and store it in local variables -->
 <body onload="start()">
+	<!-- The div below contains the nav bar display on every general user page -->
 	<div id="nav_bar" style="padding-bottom: 3rem;">
 	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
+	    	<!-- This nav item links to the home page -->
 			<a class="navbar-brand" href="#">Iron Bronco</a>
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -26,23 +35,32 @@
 			<div class="navbar-collapse collapse" id="navbarsExampleDefault" style="">
 	    		<ul class="navbar-nav mr-auto">
 	      			<li class="nav-item active">
-	        			<a class="nav-link" href="IronBroncoHome.html">Home<span class="sr-only">(current)</span></a>
+	      				<!-- This nav item links to the current page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html">Home<span class="sr-only">(current)</span></a>
 	      			</li>
 	      			<li class="nav-item">
-	        			<a class="nav-link" href="IronBroncoLogInfo.html">Log</a>
+	      				<!-- This nav item links to the Log Info page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoLogInfo.html">Log</a>
 	      			</li>
 	      			<li class="nav-item">
-	        			<a class="nav-link" href="IronBroncoTeam.html">Team</a>
+	      				<!-- This nav item links to the team page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoTeam.html">Team</a>
 	      			</li>
 	      			<li class="nav-item">
-	        			<a class="nav-link" href="IronBroncoLeaderboards.html">Leaderboards</a>
+	      				<!-- This nav item links to the Leaderboards page -->
+	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoLeaderboards.html">Leaderboards</a>
 	      			</li>
+	      			<!-- This drop down menu button opens a dropdown menu -->
 	      			<li class="nav-item dropdown">
 	        			<a class="nav-link dropdown-toggle" role="button" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
 	        			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	          				<a class="dropdown-item" href="IronBroncoLogInfo.html">Log Info</a>
-	          				<a class="dropdown-item" href="IronBroncoJoinCreateTeam.html">Join/Create a Team</a>
+	          				<!-- This drop down item links the user to the Log Info page when clicked on -->
+	          				<a class="dropdown-item" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoLogInfo.html">Log Info</a>
+	          				<!-- This drop down item links the user to the Join/Create a Team page when clicked on -->
+	          				<a class="dropdown-item" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoJoinCreateTeam.html">Join/Create a Team</a>
+	          				<!-- This drop down item allows the user to leave their team when clicked on -->
 	          				<a class="dropdown-item" onclick="leaveTeam();">Leave Team</a>
+	          				<!-- This drop down item logs out the user when clicked on -->
 	          				<a class="dropdown-item" href="https://test-login-1573079166139.firebaseapp.com/" onclick="signOut();">Log Out</a>
 	        			</div>
 	      			</li>
@@ -50,8 +68,10 @@
 	  		</div>
 		</nav>
 	</div>
+	<!-- This div contains the join team form -->
 	<div id="jointeam" class="container" style="float: left; width: 50%;">
 		<h1 style="padding-bottom: 3rem;">Join a Team</h1>
+		<!-- This form contains an input box where the user can enter a team they wish to join -->
 		<form>
 			<div class="container" style="padding:1rem;">
 				<div class="row">
@@ -63,6 +83,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- This button will when clicked will call a function that will join the user to the specified team -->
 			<div class="infobBox" align="center" style="padding-top: 3rem;">
 				<button id="joinTeamBtn" onclick = "joinTeam()" type="button" class="btn btn-primary">Join a Team</button>
 			</div>
@@ -70,6 +91,7 @@
 	</div>
 	<div id="createteam" class="container" style="float: left; width: 50%;">
 		<h1 style="padding-bottom: 3rem;">Create a New Team</h1>
+		<!-- This form contains an input box where the user can enter a team they wish to create -->
 		<form>
 			<div class="container" style="padding:1rem;">
 				<div class="row">
@@ -81,6 +103,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- This button will when clicked will call the function that will create a team -->
 			<div class="infobBox" align="center" style="padding-top: 3rem;">
 				<button id="infoBtn" onclick = "createTeam()" type="button" class="btn btn-primary">Create a New Team</button>
 			</div>

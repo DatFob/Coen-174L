@@ -13,7 +13,6 @@ var topUsers = [];
 var teamName;
 var topUsersCnt, topTeamsCnt;
 
-
 //Below is firebase configuration and set up code
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -37,7 +36,6 @@ function displayUsers(){
     console.log(users);
     users.forEach(displayEachUser);
 }
-
 
 //Display teams on admin's page
 function displayTeams(){

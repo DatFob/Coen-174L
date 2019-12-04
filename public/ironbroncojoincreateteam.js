@@ -3,6 +3,7 @@
    Joseph Sindelar
    Mike Zhao
    The Iron Bronco Project*/
+
 var userEmail = JSON.parse(localStorage.getItem('email'));
 var userName = JSON.parse(localStorage.getItem('userName'));
 var newTeamName, joinTeamName, memberCount;
@@ -10,7 +11,6 @@ var userBiking, userSwimming, userRunning, userTotal;
 var teamBiking, teamSwimming, teamRunning, teamTotal;
 var teamCount, teamName;
 var member1, member2, member3;
-
 
 //Below is code to set up and configure firebase 
 const firebaseConfig = {

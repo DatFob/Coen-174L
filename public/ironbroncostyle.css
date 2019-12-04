@@ -1,3 +1,9 @@
+/*  COEN 174l 2019 Fall
+    Emma Allegrucci
+    Joseph Sindelar
+    Mike Zhao
+    The Iron Bronco Project */
+
 label {
 	padding: 12px 12px 12px 0;
 	display: inline-block;
@@ -77,24 +83,6 @@ p {
 	font-size: 20px;
 }
 
-/*ul {
-	list-style-type: none;
-	display: block;
-	visibility: visible;
-	width: 1045px;
-	float: left;
-	clear: left;
-	clear: right;
-	background-color: rgb(69, 91, 104);
-	margin: auto;
-	text-align: center;
-	padding-right: 50px;
-	padding: 20px;
-	font-size: 16px;
-	font-style: bold;
-	font-family: "Helvetica Neue";
-}*/
-
 li {
 	display: inline;
 }
@@ -110,16 +98,6 @@ li a {
 	margin-top: 2rem;
 	margin-bottom: 10px;
 	align-self: center;
-}
-
-#header {
-	/*width: 86%;
-	height: 70px;
-	margin-left:10px;
-	margin-top: 30px;
-	margin-bottom: 20px;
-	/*float: right;*/
-	/*clear: none;*/
 }
 
 #header h1 {
@@ -148,40 +126,3 @@ li a {
 #teamprogress p {
 	text-align: center;
 }
-
-/*#nav_bar {
-	display: block;
-	visibility: visible;
-	width: 1045px;
-	float: left;
-	clear: left;
-	clear: right;
-	background-color: rgb(69, 91, 104);
-	margin: auto;
-	text-align: center;
-	padding-right: 50px;
-	padding: 20px;
-	font-size: 16px;
-	font-style: bold;
-	font-family: "Helvetica Neue";
-}*/
-/*
-#progress {
-	width: 100%;
-	clear: left;
-	clear: right;
-}*/
-
-/*#progress h2 {
-	color: rgb(181, 0, 67);
-	font-size: 40px;
-	font-family: "Helvetica Neue";
-	font-style: bold;
-}
-
-#progress p {
-	margin-left: 20px;
-	color: rgb(181, 0, 67);
-	font-size: 20px;
-	font-family: "Helvetica Neue";
-}*/

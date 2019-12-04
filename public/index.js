@@ -4,9 +4,9 @@
    Mike Zhao
    The Iron Bronco Project*/
 
-  
-//Below is firebase configuration & set up code
 var userEmail, userName;
+
+//Below is firebase configuration & set up code
 const firebaseConfig = {
   apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
   authDomain: "test-login-1573079166139.firebaseapp.com",
@@ -17,6 +17,7 @@ const firebaseConfig = {
   appId: "1:1042080648547:web:42a92c14b913d229909756",
   measurementId: "G-WQ9Z1673RK"
 };
+
 var project = firebase.initializeApp(firebaseConfig);
 var firestore = project.firestore();
 var collectionRef = firestore.collection("users");
@@ -25,42 +26,40 @@ var docRef = firestore.doc('users/Test');
 
 //Saves user name and user email to the fire base then direct them to home page, if email is admin's email then he will be redirected to the admin page
 function saveLoginInfo(userName, userEmail){
-  console.log('Save Data function evoked');
-  userRef.get().then((docSnapshot) => {
-    if (docSnapshot.exists) {
-      userRef.onSnapshot((doc) => {
-          console.log("user exists, will not create a new account...");
-          if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin')
-    {
-        return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
-    }
-    return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
-      });
-    } else {
-      console.log("user does not exist, saving new user to database..");
-      userRef.set({
-        name: userName,
-        email: userEmail,
-        team: '',
-        swim: 0,
-        run: 0,
-        bike: 0,
-        total: 0
-    }).then(function(){
-      console.log('success'); 
-      if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin')
-    {
-        return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
-    }
-    return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
-    }).catch(function(error){
-      console.log('error occured');
-    });
-    }
-});
-    
+	console.log('Save Data function evoked');
+	userRef.get().then((docSnapshot) => {
+	    if (docSnapshot.exists) {
+	    	userRef.onSnapshot((doc) => {
+	        	console.log("user exists, will not create a new account...");
+	        	if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin') {
+	        		return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
+	        	}
+	    		return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
+	      	});
+	    }
+	    else {
+		    console.log("user does not exist, saving new user to database..");
+		    userRef.set({
+		        name: userName,
+		        email: userEmail,
+		        team: '',
+		        swim: 0,
+		        run: 0,
+		        bike: 0,
+		        total: 0
+		    }).then(function(){
+		    	console.log('success'); 
+		    	if (userEmail == 'ironbroncomanager@gmail.com' || userName == 'IronBronco Admin')
+		    	{
+		        	return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html';
+		    	}
+		    	return window.location.href='https://test-login-1573079166139.firebaseapp.com/IronBroncoHome.html';
+		    }).catch(function(error){
+		      	console.log('error occured');
+		    });
+	    }
+	});   
 }
-
 
 //This function use Google API to sign into our system
 function onSignIn(googleUser) 
@@ -83,23 +82,20 @@ function onSignIn(googleUser)
 
 //This function use Google API to sign into our system
 function onSignIn(googleUser) {
-  // Useful data for your client-side scripts:
-  var profile = googleUser.getBasicProfile();
-  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-  console.log('Full Name: ' + profile.getName());
-  console.log('Given Name: ' + profile.getGivenName());
-  console.log('Family Name: ' + profile.getFamilyName());
-  console.log("Image URL: " + profile.getImageUrl());
-  console.log("Email: " + profile.getEmail());
-  userEmail = profile.getEmail();
-  userName = profile.getName();
-  userRef = collectionRef.doc(userName);
-  localStorage.setItem('userName', JSON.stringify((userName)));
-  localStorage.setItem('email',JSON.stringify(userEmail));
-  saveLoginInfo(userName,userEmail);
-  // The ID token you need to pass to your backend:
-  /*var id_token = googleUser.getAuthResponse().id_token;
-  console.log("ID Token: " + id_token);*/
+	// Useful data for your client-side scripts:
+	var profile = googleUser.getBasicProfile();
+	console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+	console.log('Full Name: ' + profile.getName());
+	console.log('Given Name: ' + profile.getGivenName());
+	console.log('Family Name: ' + profile.getFamilyName());
+	console.log("Image URL: " + profile.getImageUrl());
+	console.log("Email: " + profile.getEmail());
+	userEmail = profile.getEmail();
+	userName = profile.getName();
+	userRef = collectionRef.doc(userName);
+	localStorage.setItem('userName', JSON.stringify((userName)));
+	localStorage.setItem('email',JSON.stringify(userEmail));
+	saveLoginInfo(userName,userEmail);
 }
 
 //sign out function, signs user out of the system

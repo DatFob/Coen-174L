@@ -9,7 +9,6 @@ var userName = JSON.parse(localStorage.getItem('userName'));
 var teamName, teamRunning, teamBiking, teamSwimming, teamTotal, member1, member2, member3, teamCount;
 var requestedTeams = [];
 
-
 //Below is firebase configuration and set up code
 const firebaseConfig = {
     apiKey: "AIzaSyCCcz2sIMLOFhT6Ltj9DSjvDdoFaPNehd0",
@@ -26,7 +25,6 @@ var project = firebase.initializeApp(firebaseConfig);
 var db = project.firestore();
 var requestedTeamsDocRef = db.collection("requestedTeams");
 
-
 //function to display all requested teams' names
 function displayRequestedTeams(){
     document.getElementById("requestedTeams").innerHTML = "";
@@ -38,7 +36,7 @@ function displayEachRequestedTeam(item, index) {
     document.getElementById("requestedTeams").innerHTML += requestedTeams[index] + "<br>"; 
 }
 
-
+//grabs the requestedTeam data collection from database and stores it in local array
 function requestedTeamData(){
     requestedTeamsDocRef.orderBy('name').get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -49,7 +47,7 @@ function requestedTeamData(){
     });
 }
 
-//TODO: Approve teams, move from collection "requested teams" to collection "teams"
+//Approves teams, move from collection "requested teams" to collection "teams"
 function approveTeam() {
     teamName = document.getElementById('team').value;
     teamData(teamName);
@@ -95,7 +93,6 @@ function teamToUser(team){
     });
 }
 
-
 //use input teamName to grab team data and save those into variables
 function teamData(teamName){
     var teamRef = db.collection('requestedTeams').doc(teamName);
@@ -118,7 +115,6 @@ function teamData(teamName){
         console.log("teamData error:", error);
     });
 }
-
 
 //sign out function, signs out users
 function signOut() {

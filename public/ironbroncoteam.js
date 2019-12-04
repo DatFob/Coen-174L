@@ -31,7 +31,6 @@ var userRef = db.collection("users").doc(userName);
 var userDocRef = db.collection("users");
 var teamDocRef = db.collection("teams");
 
-
 //If user has a team, grab team name.
 function userTeamName(){
     userRef.get().then(function(doc) {
@@ -48,7 +47,6 @@ function userTeamName(){
         console.log("Error getting document:", error);
     });
 }
-
 
 //Grab team data using input teamName then save into variables
 function teamData(teamName){
@@ -72,7 +70,6 @@ function teamData(teamName){
         console.log("Error getting document:", error);
     });
 }
-
 
 //Grab user data using input member
 function memberData(member){
@@ -119,7 +116,6 @@ function displayTeam(){
     }
 }
 
-
 //Display member 1's data and progress
 function displayMember1(){
     var memRef = db.collection("users").doc(teamMember1);
@@ -143,7 +139,6 @@ function displayMember1(){
         console.log("Error getting document:", error);
     });
 }
-
 
 //Display member 2's data and progress
 function displayMember2(){
@@ -169,7 +164,6 @@ function displayMember2(){
     });
 }
 
-
 //Display member 3's data and progress
 function displayMember3(){
     var memRef = db.collection("users").doc(teamMember3);
@@ -193,7 +187,6 @@ function displayMember3(){
         console.log("Error getting document:", error);
     });
 }
-
 
 //Delete user from team, update user & team data
 function leaveTeam() {
@@ -263,7 +256,6 @@ function leaveTeam() {
     }
 }
 
-
 //remove member 1 from team
 function remove1() {
     if (teamMember1) {
@@ -294,7 +286,6 @@ function remove1() {
     }
     displayTeam();
 }
-
 
 //remove member 2 from team
 function remove2() {
@@ -328,7 +319,6 @@ function remove2() {
     displayTeam();
 }
 
-
 //remove member 3 from team
 function remove3() {
     if (teamMember1) {
@@ -359,7 +349,6 @@ function remove3() {
     }
     displayTeam();
 }
-
 
 //signs user out 
 function signOut() {

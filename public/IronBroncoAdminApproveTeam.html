@@ -1,3 +1,9 @@
+<!--COEN 174l 2019 Fall
+    Emma Allegrucci
+    Joseph Sindelar
+    Mike Zhao
+    The Iron Bronco Project-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +22,12 @@
 	<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
 	<script src="ironbroncoadminapproveteam.js"></script>
 </head>
+<!-- on opening this page will load the requestedTeam data from the database and place it in a local variable -->
 <body onload="requestedTeamData();">
+	<!-- The div below contains the nav bar exclusive to the admin page -->
 	<div id="nav_bar" style="padding-bottom: 3rem;">
 	    <nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: rgb(69, 91, 104);">
+	    	<!-- This nav item links to the home page -->
 			<a class="navbar-brand" href="#">Iron Bronco</a>
 			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -26,17 +35,18 @@
 			<div class="navbar-collapse collapse" id="navbarsExampleDefault" style="">
 	    		<ul class="navbar-nav mr-auto">
 	      			<li class="nav-item active">
+	      				<!-- This nav item links to the current page -->
 	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoAdmin.html">Home<span class="sr-only">(current)</span></a>
 	      			</li>
 	      			<li class="nav-item">
+	      				<!-- This nav item links to the approve team page -->
 	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoAdminApproveTeam.html">Approve Teams</a>
 	      			</li>
-	      			<li class="nav-item">
-	        			<a class="nav-link" href="https://test-login-1573079166139.firebaseapp.com/IronBroncoAdminManageTeams.html">Manage Teams</a>
-	      			</li>
+	      			<!-- This drop down menu button opens a dropdown menu -->
 	      			<li class="nav-item dropdown">
 	        			<a class="nav-link dropdown-toggle" role="button" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 	        			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+	        				<!-- This drop down item logs out the admin when clicked on -->
 	          				<a class="dropdown-item" href="https://test-login-1573079166139.firebaseapp.com/" onclick="signOut();">Log Out</a>
 	        			</div>
 	      			</li>
@@ -44,19 +54,24 @@
 	  		</div>
 		</nav>
 	</div>
+	<!-- This container contains the list of requested teams -->
 	<main class="container">
 		<h1 style="padding-bottom: 3rem;">Approve Teams</h1>
 		<div id="listOfTeams" class="container" style="float: left; width: 50%;">
 			<h2>Requested Teams</h2>
+			<!-- This paragraph displays the list of requested teams alphabetically -->
 			<p id="requestedTeams" class="container" text-align="center">
 			</p>
 			<div class="infobBox" align="center">
+				<!-- This button will display the list of requested teams when clicked -->
 				<button id="infoBtn" onclick="displayRequestedTeams();" type="button" class="btn btn-primary">Show Requested Teams</button>
 			</div>
 		</div>
 	</main>
+	<!-- This container contains a form that the admin can type into to try and approve a team -->
 	<main id="approveTeam" class="container" style="float: left; width: 50%;">
 		<h2 style="padding-bottom: 1.5rem;">Approve Team</h2>
+		<!-- This form contains an input box where the admin can enter the team they would like to approve -->
 		<form>
 			<div class="container" style="padding:1rem;">
 				<div class="row">
@@ -68,6 +83,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- This button will when clicked will call the function approve team -->
 			<div class="infobBox" align="center" style="padding-top: 1.5rem; padding-bottom: 3rem;">
 				<button id="approveTeamBtn" onclick = "approveTeam();" type="button" class="btn btn-primary">Approve Team</button>
 			</div>

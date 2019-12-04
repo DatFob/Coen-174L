@@ -56,14 +56,17 @@ function displayTeams(){
     console.log(teams);
     teams.forEach(displayEachTeam);
 }
+
 //Display each team
 function displayEachTeam(item, index) {
     document.getElementById("teamLeaders").innerHTML += teams[index].name + " " + teams[index].total + " miles" + "<br>"; 
 }
+
 //Display each user
 function displayEachUser(item, index) {
     document.getElementById("individualLeaders").innerHTML += users[index].name + " " + users[index].total + " miles" + "<br>"; 
 }
+
 //use functions to grab team and user data
 function data(){
     userData();
@@ -81,6 +84,7 @@ function userData(){
         });
     });
 }
+
 //Order teams in decreasing order by "total" then push into teams
 function teamData(){
     teamDocRef.orderBy('total').get().then(function(querySnapshot) {
@@ -90,6 +94,7 @@ function teamData(){
         });
     });
 }
+
 //display current leaderboards
 function displayLeaderboards(){
     document.getElementById("individualLeaders").innerHTML = "";
@@ -99,6 +104,7 @@ function displayLeaderboards(){
     displayUsers();
     displayTeams();
 }
+
 //delete user from team, update team and user data
 function leaveTeam() {
     if (teamName != null && teamName != '')
@@ -166,6 +172,7 @@ function leaveTeam() {
         alert("Unable to leave a team since you are not a member of one.");
     }
 }
+
 //signs user out of the system
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
